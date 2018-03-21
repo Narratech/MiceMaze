@@ -97,7 +97,7 @@ public class MouseMovement : NetworkBehaviour{
             if (Physics.Raycast(ray, out hit, layerMask))
             {
                 pos.x = (int)this.gameObject.transform.position.x / 10;
-                pos.y = 2.5f;
+                pos.y = 0.75f;
                 pos.z = (int)this.gameObject.transform.position.z / 10;
                 if(hit.collider.gameObject.layer == 8)
                 {
@@ -136,7 +136,7 @@ public class MouseMovement : NetworkBehaviour{
         bool moved = false;
         GameObject contains = tile.GetComponent<TileManager>().contains;
         Vector3 pos = tile.GetComponent<TileManager>().GetPosition();
-        pos.y = 2.5f;
+        pos.y = 0.75f;
      
         if (contains == null)
         {
@@ -174,7 +174,7 @@ public class MouseMovement : NetworkBehaviour{
         Vector3 pos = positionCheese;
         pos.z = pos.z / 10;
         pos.x = pos.x / 10;
-        pos.y = 2.5f;
+        pos.y = 0.75f;
 
         // Reutilizar el código de Mover (sacarlo a una función auxiliar)... y luego hacéis el Destroy
         if (position.z + 1 == pos.z && position.x == pos.x)
@@ -219,7 +219,7 @@ public class MouseMovement : NetworkBehaviour{
             yield return 0.1;
         }
         Vector3 posTile = position;
-        posTile.y = 2.5f;
+        posTile.y = 0.75f;
         Quaternion rotation = new Quaternion();
         this.gameObject.transform.SetPositionAndRotation(posTile, rotation);
     }

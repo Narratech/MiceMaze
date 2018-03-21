@@ -42,7 +42,7 @@ public class MazeBuilder: MonoBehaviour {
 			case "Empty": break;
 			case "Spawn":
 
-				newPosition.y = 2.5f;
+				newPosition.y = 0.75f;
 				m_SpawnList[contSpawns].transform.SetPositionAndRotation(newPosition, newRotation);
 				contSpawns++;
 				newPosition.y = 0f;

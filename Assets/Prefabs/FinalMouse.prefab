@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4013236505518028}
   - component: {fileID: 33097812165698068}
   - component: {fileID: 23443780746209712}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZBrushPolyMesh3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4219846675612150}
   - component: {fileID: 33926014034146600}
   - component: {fileID: 23210151530145484}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZBrushPolyMesh3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4274860725068566}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: front teeth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 4444014256614038}
   - component: {fileID: 33600635101749394}
   - component: {fileID: 23364268656215262}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZBrushPolyMesh3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4021973658729856}
   - component: {fileID: 33486347692645256}
   - component: {fileID: 23502586796935112}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZBrushPolyMesh3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4614543162443124}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: hand nails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4042204963147476}
   - component: {fileID: 33021771374549060}
   - component: {fileID: 23671261025925460}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZBrushPolyMesh3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4674177028267122}
   - component: {fileID: 33635447934340740}
   - component: {fileID: 23813479667770378}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZBrushPolyMesh3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4021953617463472}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyebrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4123225232913478}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4960444412213380}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: teeth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4113906469977840}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: rat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +211,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4591995803363174}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: toe nails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 114047730632282196}
   - component: {fileID: 65830700078785280}
   - component: {fileID: 114524139859211904}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FinalMouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 4690591722438598}
   - component: {fileID: 33959342262877336}
   - component: {fileID: 23794061497748880}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ZBrushPolyMesh3D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

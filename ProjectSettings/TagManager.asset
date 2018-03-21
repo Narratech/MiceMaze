@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Cheese
   layers:
   - Default
   - TransparentFX
@@ -14,10 +15,10 @@ TagManager:
   - 
   - 
   - Tiles
+  - Cheese
+  - Shoji
   - Walls
   - Player
-  - 
-  - 
   - 
   - 
   - 
@@ -43,6 +44,12 @@ TagManager:
     locked: 0
   - name: Tiles
     uniqueID: 61417549
+    locked: 0
+  - name: Cheese
+    uniqueID: 3833917005
+    locked: 0
+  - name: Shoji
+    uniqueID: 242211561
     locked: 0
   - name: Walls
     uniqueID: 1460234363
