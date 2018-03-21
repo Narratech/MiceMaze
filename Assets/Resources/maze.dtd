@@ -1,0 +1,10 @@
+<!DOCTYPE Maze
+[
+<!ELEMENT Maze (Tiles)>
+<!ELEMENT Tiles (Tile*)>
+<!ELEMENT Tile (Rotation, X, Z)>
+<!ATTLIST Tile contains CDATA #REQUIRED>
+<!ELEMENT Rotation (#PCDATA)>
+<!ELEMENT X (#PCDATA)>
+<!ELEMENT Z (#PCDATA)>
+]>

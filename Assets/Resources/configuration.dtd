@@ -1,0 +1,17 @@
+<!DOCTYPE Configuration
+[
+<!ELEMENT Configuration (Mouses, Maze, NumberTurnsMaze, NumberTurnsInterrogation, ScientificIA)>
+<!ELEMENT Mouses (Mouse+)>
+<!ATTLIST Mouses number CDATA #REQUIRED>
+<!ELEMENT Mouse (Code*, Color)>
+<!ATTLIST Mouse IA CDATA #REQUIRED>
+<!ELEMENT Code (#PCDATA)>
+<!ELEMENT Color (Red, Green, Blue)>
+<!ELEMENT Red (#PCDATA)>
+<!ELEMENT Green (#PCDATA)>
+<!ELEMENT Blue (#PCDATA)>
+<!ELEMENT Maze (#PCDATA)>
+<!ELEMENT NumberTurnsMaze (#PCDATA)>
+<!ELEMENT NumberTurnsInterrogation (#PCDATA)>
+<!ELEMENT ScientificIA (#PCDATA)>
+]>
