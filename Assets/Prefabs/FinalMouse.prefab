@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 114047730632282196}
   - component: {fileID: 65830700078785280}
   - component: {fileID: 114524139859211904}
+  - component: {fileID: 114417018582535580}
   m_Layer: 12
   m_Name: FinalMouse
   m_TagString: Untagged
@@ -783,6 +784,17 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114417018582535580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925488802253488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de15a8a332b157947b832bbcc31b0517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114503985499532728
 MonoBehaviour:
   m_ObjectHideFlags: 1
