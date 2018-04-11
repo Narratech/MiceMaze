@@ -31,7 +31,7 @@
 			<X>4</X>
 			<Z>0</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Shoji">
 			<Rotation>0</Rotation>
 			<X>5</X>
 			<Z>0</Z>
@@ -64,12 +64,12 @@
 			<Z>1</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>180</Rotation>
+			<Rotation>0</Rotation>
 			<X>1</X>
 			<Z>1</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>90</Rotation>
+			<Rotation>0</Rotation>
 			<X>2</X>
 			<Z>1</Z>
 		</Tile>
@@ -83,23 +83,23 @@
 			<X>4</X>
 			<Z>1</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>5</X>
 			<Z>1</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>270</Rotation>
+			<Rotation>0</Rotation>
 			<X>6</X>
 			<Z>1</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>90</Rotation>
+			<Rotation>0</Rotation>
 			<X>7</X>
 			<Z>1</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>90</Rotation>
+			<Rotation>0</Rotation>
 			<X>8</X>
 			<Z>1</Z>
 		</Tile>
@@ -135,12 +135,12 @@
 			<X>4</X>
 			<Z>2</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>5</X>
 			<Z>2</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>6</X>
 			<Z>2</Z>
@@ -167,7 +167,7 @@
 			<X>0</X>
 			<Z>3</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Shoji">
 			<Rotation>0</Rotation>
 			<X>1</X>
 			<Z>3</Z>
@@ -177,7 +177,7 @@
 			<X>2</X>
 			<Z>3</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>3</X>
 			<Z>3</Z>
@@ -192,7 +192,7 @@
 			<X>5</X>
 			<Z>3</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>6</X>
 			<Z>3</Z>
@@ -202,38 +202,38 @@
 			<X>7</X>
 			<Z>3</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>8</X>
 			<Z>3</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>9</X>
 			<Z>3</Z>
 		</Tile>
 		
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>0</X>
 			<Z>4</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>1</X>
 			<Z>4</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>2</X>
 			<Z>4</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>3</X>
 			<Z>4</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>4</X>
 			<Z>4</Z>
@@ -243,7 +243,7 @@
 			<X>5</X>
 			<Z>4</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>6</X>
 			<Z>4</Z>
@@ -253,7 +253,7 @@
 			<X>7</X>
 			<Z>4</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>8</X>
 			<Z>4</Z>
@@ -269,7 +269,7 @@
 			<X>0</X>
 			<Z>5</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Shoji">
 			<Rotation>0</Rotation>
 			<X>1</X>
 			<Z>5</Z>
@@ -304,7 +304,7 @@
 			<X>7</X>
 			<Z>5</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Shoji">
 			<Rotation>0</Rotation>
 			<X>8</X>
 			<Z>5</Z>
@@ -321,36 +321,36 @@
 			<Z>6</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>90</Rotation>
+			<Rotation>0</Rotation>
 			<X>1</X>
 			<Z>6</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>2</X>
 			<Z>6</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>3</X>
 			<Z>6</Z>
 		</Tile>
-		<Tile contains="Empty">
-			<Rotation>0</Rotation>
+		<Tile contains="Shoji">
+			<Rotation>90</Rotation>
 			<X>4</X>
 			<Z>6</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>5</X>
 			<Z>6</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>6</X>
 			<Z>6</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>7</X>
 			<Z>6</Z>
@@ -425,17 +425,17 @@
 			<Z>8</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>270</Rotation>
+			<Rotation>0</Rotation>
 			<X>1</X>
 			<Z>8</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>90</Rotation>
+			<Rotation>0</Rotation>
 			<X>2</X>
 			<Z>8</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>90</Rotation>
+			<Rotation>0</Rotation>
 			<X>3</X>
 			<Z>8</Z>
 		</Tile>
@@ -444,7 +444,7 @@
 			<X>4</X>
 			<Z>8</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>5</X>
 			<Z>8</Z>
@@ -455,7 +455,7 @@
 			<Z>8</Z>
 		</Tile>
 		<Tile contains="Wall">
-			<Rotation>180</Rotation>
+			<Rotation>0</Rotation>
 			<X>7</X>
 			<Z>8</Z>
 		</Tile>
@@ -486,7 +486,7 @@
 			<X>2</X>
 			<Z>9</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Shoji">
 			<Rotation>0</Rotation>
 			<X>3</X>
 			<Z>9</Z>
@@ -496,7 +496,7 @@
 			<X>4</X>
 			<Z>9</Z>
 		</Tile>
-		<Tile contains="Empty">
+		<Tile contains="Wall">
 			<Rotation>0</Rotation>
 			<X>5</X>
 			<Z>9</Z>

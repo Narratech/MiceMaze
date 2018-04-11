@@ -9,6 +9,7 @@ public class MazeBuilder: MonoBehaviour {
 	public GameObject m_Border;
 	public GameObject m_Wall;
     public GameObject m_Cheese;
+    public GameObject m_Shoji;
 	public GameObject[] m_SpawnList = new GameObject[4];
 	private static int m_MazeLength = 10;
 
@@ -63,6 +64,15 @@ public class MazeBuilder: MonoBehaviour {
                 tile.GetComponent<TileManager>().SetContains(cheese);
                 newPosition.y = 0f;
                 break;
+            case "Shoji":
+                newPosition.y = 5f;
+                newRotation = Quaternion.Euler(0, maze.Tiles[cont].Rotation, 0);
+                GameObject shoji = Instantiate(m_Shoji, newPosition, newRotation);
+
+                tile.GetComponent<TileManager>().SetContains(shoji);
+                newPosition.y = 0f;
+                break;
+
             }
             
 
