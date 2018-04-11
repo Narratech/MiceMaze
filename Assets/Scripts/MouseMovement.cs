@@ -41,6 +41,7 @@ public class MouseMovement : NetworkBehaviour{
         manager.GetComponent<GameManager>().IncrementaRatones();
         m_PlayerNumber = manager.GetComponent<GameManager>().contadorRatones;
         manager.GetComponent<GameManager>().m_Mouses[m_PlayerNumber - 1] = this.gameObject;
+        this.gameObject.transform.position = manager.GetComponent<MazeBuilder>().m_SpawnList[m_PlayerNumber - 1].transform.position;
 		
     }
 

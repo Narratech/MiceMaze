@@ -10,7 +10,7 @@ public class GameManager :  NetworkBehaviour
     public int m_NumTurnos;
     public float m_StartDelay = 3f;
     public float m_EndDelay = 3f;
-    public GameObject[] m_Mouses = new GameObject[5];
+    public GameObject[] m_Mouses = new GameObject[4];
     public GameObject m_MousePrefab;
 
 	public Text prueba;
