@@ -13,7 +13,7 @@ public class GameManager :  NetworkBehaviour
     public GameObject[] m_Mouses = new GameObject[4];
     public GameObject m_MousePrefab;
 
-	public Text prueba;
+	public Text prueba;// texto para indicar el turno en pantalla
 
     private WaitForSeconds m_StartWait;
     private WaitForSeconds m_EndWait;
@@ -21,10 +21,13 @@ public class GameManager :  NetworkBehaviour
     [SyncVar]
     public int turno = 1;
 
+	[SyncVar]
+	public bool finJuego = false;
+
     public int contadorRatones = 0;
     // Use this for initialization
 
-    
+	public Color culpable;//color del jugador que se ha comido el queso
 
     void Start()
     {
@@ -53,8 +56,15 @@ public class GameManager :  NetworkBehaviour
 		prueba.text = "" + turno;
     }
 
-    
+	public void AsignarCulpable(Color c){
+		culpable = c;
+	}
 
+    
+	public void FinJuego(){
+		turno = 0;
+		prueba.text = "SE ACABÓ";
+	}
     
 
     // Update is called once per frame

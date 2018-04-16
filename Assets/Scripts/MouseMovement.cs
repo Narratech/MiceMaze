@@ -14,7 +14,8 @@ using UnityEngine.UI;
 
 // Renombrad ahora como el MouseManager
 public class MouseMovement : NetworkBehaviour{
-
+	//SE LE ASIGNA AL CIENTIFICO EL COLOR MAGENTA, ES DECIR, Color.magenta
+	//EL RESTO DE COLORES CORRESPONDEN A UN JUGADOR DE TIPO RATON
 
     [SyncVar]
     public int m_PlayerNumber = 0;//1;
@@ -22,6 +23,12 @@ public class MouseMovement : NetworkBehaviour{
 
 	[SyncVar]
 	public Color mi_color = Color.red;
+
+	public int puntos = 0;
+	public Text mis_puntos;
+
+	[SyncVar]
+	public bool quesoComido = false;
     
 
     [SyncVar]
@@ -36,6 +43,7 @@ public class MouseMovement : NetworkBehaviour{
     {
 		Renderer[] rends = GetComponentsInChildren<Renderer> ();
         rends[0].material.color = mi_color; 
+		//mis_puntos.text = "" + puntos;
 		
         manager = GameObject.Find("GameManager");
         manager.GetComponent<GameManager>().IncrementaRatones();
@@ -47,7 +55,7 @@ public class MouseMovement : NetworkBehaviour{
 
     private void Awake()
     {
-        
+		mis_puntos.text = "" + puntos;
     }
 
 
@@ -56,10 +64,20 @@ public class MouseMovement : NetworkBehaviour{
         this.move = true;
     }
 
+	[ClientRpc]
+	void RpcTerminarJuego(){
+		manager.GetComponent<GameManager> ().FinJuego ();
+	}
+
+	[Command]
+	void CmdTerminarJuego()
+	{
+		RpcTerminarJuego();
+	}
+
     [ClientRpc]
     void RpcNotificarMovimiento()
     {
-        
         manager.GetComponent<GameManager>().CambiarTurno();
     }
 
@@ -72,6 +90,7 @@ public class MouseMovement : NetworkBehaviour{
     // Intentad que no haya tantas cosas en el Update, sino recurrir a eventos
     private void Update()
     {
+		
         RaycastHit hit;
         Ray ray;
         int layerMask = 1 << 8;
@@ -87,6 +106,9 @@ public class MouseMovement : NetworkBehaviour{
             return;
         }
        
+		if (mi_color == Color.magenta) {
+			return;
+		}
         // Se me hace raro verlo aquí... a lo mejor se podría recibir el clic EN GENERAL (de hecho se puede recibir el de la casilla... que
         // esta vez si es el jugador local el que la ha clicado, para coger el color y 
         // luego vosotros tener un EVENTO PROPIO que recibe este MouseManager, y que las casillas cuando son clicadas, notifiquen en general "ESTE JUGADOR -COLOR TAL- ha clicado la casilla la X, Y"), 
@@ -119,10 +141,15 @@ public class MouseMovement : NetworkBehaviour{
 
                     if (Eat(hit.collider.gameObject, posCheese, pos))
                     {
+						if (isServer)
+							RpcTerminarJuego ();
+						else
+							CmdTerminarJuego ();
+						/*quesoComido = true;
                         if (isServer)
                             RpcNotificarMovimiento();
                         else
-                            CmdNotificarMovimiento();
+                            CmdNotificarMovimiento();*/
                     }
                 }
                
