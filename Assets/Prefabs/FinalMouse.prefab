@@ -841,8 +841,9 @@ MonoBehaviour:
   m_PlayerNumber: 0
   manager: {fileID: 0}
   mi_color: {r: 1, g: 0, b: 0, a: 1}
-  puntos: 0
-  mis_puntos: {fileID: 114589279207059318, guid: b03eadc22ec5e12469817aac6908ee90,
+  mis_puntos: 6
+  puntuacion: {fileID: 114565303965894514, guid: b03eadc22ec5e12469817aac6908ee90,
     type: 2}
+  quesoComido: 0
   move: 0
   te_has_movido: 0

@@ -15,6 +15,9 @@ public class GameManager :  NetworkBehaviour
 
 	public Text prueba;// texto para indicar el turno en pantalla
 
+	public Text puntuacion;
+	public int puntosRaton;
+
     private WaitForSeconds m_StartWait;
     private WaitForSeconds m_EndWait;
 
@@ -25,7 +28,6 @@ public class GameManager :  NetworkBehaviour
 	public bool finJuego = false;
 
     public int contadorRatones = 0;
-    // Use this for initialization
 
 	public Color culpable;//color del jugador que se ha comido el queso
 
@@ -35,9 +37,8 @@ public class GameManager :  NetworkBehaviour
         m_EndWait = new WaitForSeconds(m_EndDelay);
 		prueba.color = Color.red;
 		prueba.text = "" + turno;
-        //SpawnAllMouses();
-
-        //StartCoroutine(GameLoop());
+		puntosRaton = 0;
+		puntuacion.text = "" + puntosRaton;
     }
 
     public void IncrementaRatones()
@@ -45,6 +46,10 @@ public class GameManager :  NetworkBehaviour
         contadorRatones++;
     }
 
+	public void cambiarPuntos(int valor){
+		puntosRaton = valor;
+		puntuacion.text = "" + puntosRaton;
+	}
     
     public void CambiarTurno()
     {
@@ -55,6 +60,8 @@ public class GameManager :  NetworkBehaviour
         }
 		prueba.text = "" + turno;
     }
+
+
 
 	public void AsignarCulpable(Color c){
 		culpable = c;

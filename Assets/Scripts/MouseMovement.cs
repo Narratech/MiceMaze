@@ -24,8 +24,8 @@ public class MouseMovement : NetworkBehaviour{
 	[SyncVar]
 	public Color mi_color = Color.red;
 
-	public int puntos = 0;
-	public Text mis_puntos;
+	public int mis_puntos;
+
 
 	[SyncVar]
 	public bool quesoComido = false;
@@ -42,20 +42,20 @@ public class MouseMovement : NetworkBehaviour{
     private void Start()
     {
 		Renderer[] rends = GetComponentsInChildren<Renderer> ();
-        rends[0].material.color = mi_color; 
-		//mis_puntos.text = "" + puntos;
-		
+        rends[0].material.color = mi_color;
+		mis_puntos = 0;
+
         manager = GameObject.Find("GameManager");
         manager.GetComponent<GameManager>().IncrementaRatones();
         m_PlayerNumber = manager.GetComponent<GameManager>().contadorRatones;
         manager.GetComponent<GameManager>().m_Mouses[m_PlayerNumber - 1] = this.gameObject;
         this.gameObject.transform.position = manager.GetComponent<MazeBuilder>().m_SpawnList[m_PlayerNumber - 1].transform.position;
-		
-    }
 
+    }
+		
     private void Awake()
     {
-		mis_puntos.text = "" + puntos;
+		
     }
 
 
@@ -87,6 +87,8 @@ public class MouseMovement : NetworkBehaviour{
         RpcNotificarMovimiento();
     }
 
+
+
     // Intentad que no haya tantas cosas en el Update, sino recurrir a eventos
     private void Update()
     {
@@ -105,10 +107,11 @@ public class MouseMovement : NetworkBehaviour{
         {
             return;
         }
-       
-		if (mi_color == Color.magenta) {
+       	
+		//Estoy hay que retocarlo, porque solo con el color no vale. Ya que lo cuenta como un raton
+		/*if (mi_color == Color.magenta) {
 			return;
-		}
+		}*/
         // Se me hace raro verlo aquí... a lo mejor se podría recibir el clic EN GENERAL (de hecho se puede recibir el de la casilla... que
         // esta vez si es el jugador local el que la ha clicado, para coger el color y 
         // luego vosotros tener un EVENTO PROPIO que recibe este MouseManager, y que las casillas cuando son clicadas, notifiquen en general "ESTE JUGADOR -COLOR TAL- ha clicado la casilla la X, Y"), 
@@ -126,6 +129,8 @@ public class MouseMovement : NetworkBehaviour{
                 {
                     if(Move(hit.collider.gameObject, pos))
                     {
+						mis_puntos++;
+						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
                         if (isServer)
                             RpcNotificarMovimiento();
                         else
@@ -141,15 +146,12 @@ public class MouseMovement : NetworkBehaviour{
 
                     if (Eat(hit.collider.gameObject, posCheese, pos))
                     {
+						mis_puntos += 100;
+						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
 						if (isServer)
 							RpcTerminarJuego ();
 						else
 							CmdTerminarJuego ();
-						/*quesoComido = true;
-                        if (isServer)
-                            RpcNotificarMovimiento();
-                        else
-                            CmdNotificarMovimiento();*/
                     }
                 }
                
@@ -192,7 +194,7 @@ public class MouseMovement : NetworkBehaviour{
            
 
         }
-        
+
         return moved;
     }
 
