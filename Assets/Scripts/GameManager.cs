@@ -14,6 +14,7 @@ public class GameManager :  NetworkBehaviour
     public GameObject m_MousePrefab;
 
 	public Text prueba;// texto para indicar el turno en pantalla
+	public Button interrogatorio;
 
 	public Text puntuacion;
 	public int puntosRaton;
@@ -39,6 +40,8 @@ public class GameManager :  NetworkBehaviour
 		prueba.text = "" + turno;
 		puntosRaton = 0;
 		puntuacion.text = "" + puntosRaton;
+		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
+		interrogatorio.enabled = !interrogatorio.enabled;
     }
 
     public void IncrementaRatones()
