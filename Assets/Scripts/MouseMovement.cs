@@ -47,7 +47,6 @@ public class MouseMovement : NetworkBehaviour{
 
         manager = GameObject.Find("GameManager");
         manager.GetComponent<GameManager>().IncrementaRatones();
-		manager.GetComponent<GameManager> ().GenerarLista (mi_color);
         m_PlayerNumber = manager.GetComponent<GameManager>().contadorRatones;
         manager.GetComponent<GameManager>().m_Mouses[m_PlayerNumber - 1] = this.gameObject;
         this.gameObject.transform.position = manager.GetComponent<MazeBuilder>().m_SpawnList[m_PlayerNumber - 1].transform.position;
@@ -75,6 +74,20 @@ public class MouseMovement : NetworkBehaviour{
 	{
 		RpcTerminarJuego();
 	}
+
+    [ClientRpc]
+    void RpcEatCheese(Vector3 pos)
+    {
+        manager.GetComponent<GameManager>().EatCheese(pos);
+    }
+
+    [Command]
+    void CmdEatCheese(Vector3 pos)
+    {
+        RpcEatCheese(pos);
+    }
+
+
 
     [ClientRpc]
     void RpcNotificarMovimiento()
@@ -151,6 +164,7 @@ public class MouseMovement : NetworkBehaviour{
 						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
 						if (isServer)
 							RpcTerminarJuego ();
+                       
 						else
 							CmdTerminarJuego ();
                     }
@@ -210,29 +224,35 @@ public class MouseMovement : NetworkBehaviour{
         // Reutilizar el código de Mover (sacarlo a una función auxiliar)... y luego hacéis el Destroy
         if (position.z + 1 == pos.z && position.x == pos.x)
         {
-            Destroy(cheese);
+           
             StartCoroutine(MoveAnimation(0, 1, positionCheese));
             moved = true;
         }
         if (position.z - 1 == pos.z && position.x == pos.x)
         {
-            Destroy(cheese);
+           
             StartCoroutine(MoveAnimation(0, -1, positionCheese));
             moved = true;
         }
         if (position.z == pos.z && position.x + 1 == pos.x)
         {
-            Destroy(cheese);
+
             StartCoroutine(MoveAnimation(1, 0, positionCheese));
             moved = true;
         }
         if (position.z == pos.z && position.x - 1 == pos.x)
         {
-            Destroy(cheese);
+           
             StartCoroutine(MoveAnimation(-1, 0, positionCheese));
             moved = true;
         }
+        if (isServer)
+        {
+            RpcEatCheese(positionCheese);
 
+        } 
+        else
+            CmdEatCheese(positionCheese);
         return moved;
     }
 
