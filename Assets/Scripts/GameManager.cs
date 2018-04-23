@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 
 public class GameManager :  NetworkBehaviour
@@ -15,13 +16,14 @@ public class GameManager :  NetworkBehaviour
 
 	public Text prueba;// texto para indicar el turno en pantalla
 	public Button interrogatorio;
+	public Dropdown ratones;
+
 
 	public Text puntuacion;
 	public int puntosRaton;
 
     private WaitForSeconds m_StartWait;
     private WaitForSeconds m_EndWait;
-    private GameObject manager;
 
     [SyncVar]
     public int turno = 1;
@@ -35,7 +37,6 @@ public class GameManager :  NetworkBehaviour
 
     void Start()
     {
-        manager = GameObject.Find("GameManager");
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
 		prueba.color = Color.red;
@@ -45,6 +46,29 @@ public class GameManager :  NetworkBehaviour
 		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
 		interrogatorio.enabled = !interrogatorio.enabled;
     }
+
+	/*public void GenerarLista(){
+		List<string> hola1 = new List<string> (){ "Rojo" };
+		ratones.AddOptions (hola1);
+		List<string> hola2 = new List<string> (){ "Verde" };
+		ratones.AddOptions (hola2);
+	}*/
+
+	public void GenerarLista(Color c){
+		if (c == Color.red) {
+			List<string> nombre = new List<string> (){ "Rojo" };
+			ratones.AddOptions (nombre);
+		} else if (c == Color.green) {
+			List<string> nombre = new List<string> (){ "Verde" };
+			ratones.AddOptions (nombre);
+		} else if (c == Color.yellow) {
+			List<string> nombre = new List<string> (){ "Amarillo" };
+			ratones.AddOptions (nombre);
+		} else if (c == Color.blue) {
+			List<string> nombre = new List<string> (){ "Azul" };
+			ratones.AddOptions (nombre);
+		}
+	}
 
     public void IncrementaRatones()
     {
@@ -66,10 +90,7 @@ public class GameManager :  NetworkBehaviour
 		prueba.text = "" + turno;
     }
 
-    public void EatCheese(Vector3 pos)
-    {
-        Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
-    }
+
 
 	public void AsignarCulpable(Color c){
 		culpable = c;

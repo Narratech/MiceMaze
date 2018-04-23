@@ -795,6 +795,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de15a8a332b157947b832bbcc31b0517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raton: {fileID: 114524139859211904}
+  colorJugador: 
 --- !u!114 &114503985499532728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -842,8 +844,6 @@ MonoBehaviour:
   manager: {fileID: 0}
   mi_color: {r: 1, g: 0, b: 0, a: 1}
   mis_puntos: 6
-  puntuacion: {fileID: 114565303965894514, guid: b03eadc22ec5e12469817aac6908ee90,
-    type: 2}
   quesoComido: 0
   move: 0
   te_has_movido: 0
