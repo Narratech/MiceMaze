@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 
 public class GameManager :  NetworkBehaviour
@@ -15,6 +16,8 @@ public class GameManager :  NetworkBehaviour
 
 	public Text prueba;// texto para indicar el turno en pantalla
 	public Button interrogatorio;
+	public Dropdown ratones;
+
 
 	public Text puntuacion;
 	public int puntosRaton;
@@ -43,6 +46,29 @@ public class GameManager :  NetworkBehaviour
 		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
 		interrogatorio.enabled = !interrogatorio.enabled;
     }
+
+	/*public void GenerarLista(){
+		List<string> hola1 = new List<string> (){ "Rojo" };
+		ratones.AddOptions (hola1);
+		List<string> hola2 = new List<string> (){ "Verde" };
+		ratones.AddOptions (hola2);
+	}*/
+
+	public void GenerarLista(Color c){
+		if (c == Color.red) {
+			List<string> nombre = new List<string> (){ "Rojo" };
+			ratones.AddOptions (nombre);
+		} else if (c == Color.green) {
+			List<string> nombre = new List<string> (){ "Verde" };
+			ratones.AddOptions (nombre);
+		} else if (c == Color.yellow) {
+			List<string> nombre = new List<string> (){ "Amarillo" };
+			ratones.AddOptions (nombre);
+		} else if (c == Color.blue) {
+			List<string> nombre = new List<string> (){ "Azul" };
+			ratones.AddOptions (nombre);
+		}
+	}
 
     public void IncrementaRatones()
     {
