@@ -12,10 +12,11 @@ public class MazeBuilder: MonoBehaviour {
     public GameObject m_Shoji;
 	public GameObject[] m_SpawnList = new GameObject[4];
 	private static int m_MazeLength = 10;
+    public GameObject[] m_Maze = new GameObject[m_MazeLength * m_MazeLength];
 
 
 
-	void Start(){
+    void Start(){
 		int rZ = 0;  //eje z rotation
 
 
@@ -35,10 +36,11 @@ public class MazeBuilder: MonoBehaviour {
 
 			GameObject tile = Instantiate(m_Tile, newPosition, newRotation);
 			tile.GetComponent<TileManager>().SetPosition(maze.Tiles[cont].X, maze.Tiles[cont].Z);
+            m_Maze[cont] = tile;
 
             // A lo mejor os interesa hacer una conversión 'canónica' a cadena todo en mayúsculas o algo así...
             // Añadir aquí el SHOJI y cualquier otro elementos que se cree
-			switch (maze.Tiles[cont].Contains)
+            switch (maze.Tiles[cont].Contains)
 			{
 			case "Empty": break;
 			case "Spawn":
@@ -116,10 +118,16 @@ public class MazeBuilder: MonoBehaviour {
 		border = Instantiate(m_Border, newPosition, newRotation);
         border.transform.localScale = scale;
     }
-		
-	
-	// Update is called once per frame
-	void Update () {
+
+    public GameObject GetTile(Vector3 pos)
+    {
+        int x = (int)pos.x / 10;
+        int z = (int)pos.z / 10;
+        return m_Maze[z * 10 + x];
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

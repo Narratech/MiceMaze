@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33491433252460058}
   - component: {fileID: 65113494840586576}
   - component: {fileID: 23407099715097612}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33056125975352146}
   - component: {fileID: 65815688266690468}
   - component: {fileID: 23372956227383694}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 33207151228796616}
   - component: {fileID: 65593758814481956}
   - component: {fileID: 23636285028811816}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 33709561167016996}
   - component: {fileID: 65132509082619602}
   - component: {fileID: 23907287895207414}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4025789223608016}
-  m_Layer: 0
+  - component: {fileID: 65487805376815474}
+  m_Layer: 10
   m_Name: BrokenShoji
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +110,7 @@ GameObject:
   - component: {fileID: 33732255682911164}
   - component: {fileID: 65180798445982012}
   - component: {fileID: 23168329285045950}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +128,7 @@ GameObject:
   - component: {fileID: 33983454232663886}
   - component: {fileID: 65058101423293822}
   - component: {fileID: 23024666768743948}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +146,7 @@ GameObject:
   - component: {fileID: 33942272333868158}
   - component: {fileID: 65052619363784094}
   - component: {fileID: 23869585704414978}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +164,7 @@ GameObject:
   - component: {fileID: 33891486839042228}
   - component: {fileID: 65395626673954476}
   - component: {fileID: 23497527827382778}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,8 +212,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771147375915916}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 8.75, z: -2.4916}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 4.932757}
+  m_LocalPosition: {x: -0, y: 8.75, z: -3.229}
+  m_LocalScale: {x: 2.5000012, y: 2.5, z: 3.4570134}
   m_Children: []
   m_Father: {fileID: 4025789223608016}
   m_RootOrder: 4
@@ -276,8 +277,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1242928322558068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.75, z: 2.4706}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 5.0226793}
+  m_LocalPosition: {x: 0, y: 8.75, z: 2.96}
+  m_LocalScale: {x: 2.5000012, y: 2.5, z: 4.043918}
   m_Children: []
   m_Father: {fileID: 4025789223608016}
   m_RootOrder: 3
@@ -695,6 +696,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65487805376815474
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420868389094018}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!65 &65593758814481956
 BoxCollider:
   m_ObjectHideFlags: 1

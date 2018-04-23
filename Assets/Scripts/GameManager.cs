@@ -13,8 +13,9 @@ public class GameManager :  NetworkBehaviour
     public float m_EndDelay = 3f;
     public GameObject[] m_Mouses = new GameObject[4];
     public GameObject m_MousePrefab;
+    public GameObject m_BrokenShoji;
 
-	public Text prueba;// texto para indicar el turno en pantalla
+    public Text prueba;// texto para indicar el turno en pantalla
 	public Button interrogatorio;
 	public Dropdown ratones;
 
@@ -24,6 +25,7 @@ public class GameManager :  NetworkBehaviour
 
     private WaitForSeconds m_StartWait;
     private WaitForSeconds m_EndWait;
+    private GameObject manager;
 
     [SyncVar]
     public int turno = 1;
@@ -37,6 +39,7 @@ public class GameManager :  NetworkBehaviour
 
     void Start()
     {
+        manager = GameObject.Find("GameManager");
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
 		prueba.color = Color.red;
@@ -90,9 +93,22 @@ public class GameManager :  NetworkBehaviour
 		prueba.text = "" + turno;
     }
 
+    public void EatCheese(Vector3 pos)
+    {
+        Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
+    }
 
+    public void BreakShoji(Vector3 pos)
+    {
+        Vector3 position = manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains.gameObject.transform.position;
+        position.y = 0f;
+        Quaternion rotation = manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains.gameObject.transform.rotation;
+        GameObject brokenShoji = Instantiate(m_BrokenShoji, position, rotation);
+        Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
+        manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().SetContains(brokenShoji);
+    }
 
-	public void AsignarCulpable(Color c){
+    public void AsignarCulpable(Color c){
 		culpable = c;
 	}
 

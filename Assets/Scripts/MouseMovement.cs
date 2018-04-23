@@ -88,6 +88,31 @@ public class MouseMovement : NetworkBehaviour{
         RpcNotificarMovimiento();
     }
 
+    [ClientRpc]
+    void RpcEatCheese(Vector3 pos)
+    {
+        manager.GetComponent<GameManager>().EatCheese(pos);
+    }
+
+    [Command]
+    void CmdEatCheese(Vector3 pos)
+    {
+        RpcEatCheese(pos);
+    }
+
+    [ClientRpc]
+    void RpcBreakShoji(Vector3 pos)
+    {
+
+        manager.GetComponent<GameManager>().BreakShoji(pos);
+    }
+
+    [Command]
+    void CmdBreakShoji(Vector3 pos)
+    {
+        RpcBreakShoji(pos);
+    }
+
 
 
     // Intentad que no haya tantas cosas en el Update, sino recurrir a eventos
@@ -126,9 +151,14 @@ public class MouseMovement : NetworkBehaviour{
                 pos.x = (int)this.gameObject.transform.position.x / 10;
                 pos.y = 0.75f;
                 pos.z = (int)this.gameObject.transform.position.z / 10;
-                if(hit.collider.gameObject.layer == 8)
+                if (hit.collider.gameObject.layer == 8 || hit.collider.gameObject.layer == 10)
                 {
-                    if(Move(hit.collider.gameObject, pos))
+                    bool shoji = false;
+                    if (hit.collider.gameObject.layer == 10)
+                    {
+                        shoji = true;
+                    }
+                    if (Move(hit.collider.gameObject, pos, shoji))
                     {
 						mis_puntos++;
 						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
@@ -162,11 +192,22 @@ public class MouseMovement : NetworkBehaviour{
 
     // Podría funcionar de esta manera: marcar la casilla de origen como libre, la de llegada como ocupada y cambiar la variables MOVING para que se vaya moviendo... 
     // pero puedes pasar ya el turno y dejar que se muevan otro jugador si quiere (aunque todavía siga moving el ratón, en sus updates) 
-    public bool Move(GameObject tile, Vector3 position)
+    public bool Move(GameObject tile, Vector3 position, bool shoji)
     {
+        GameObject contains = null;
         bool moved = false;
-        GameObject contains = tile.GetComponent<TileManager>().contains;
-        Vector3 pos = tile.GetComponent<TileManager>().GetPosition();
+        Vector3 pos;
+        if (!shoji)
+        {
+            contains = tile.GetComponent<TileManager>().contains;
+            pos = tile.GetComponent<TileManager>().GetPosition();
+        }
+        else
+        {
+            pos = tile.gameObject.transform.position;
+            pos.x = (int) pos.x / 10;
+            pos.z = (int) pos.z / 10;
+        }
         pos.y = 0.75f;
      
         if (contains == null)
@@ -195,6 +236,17 @@ public class MouseMovement : NetworkBehaviour{
            
 
         }
+        if (moved && shoji)
+        {
+            if (isServer)
+            {
+                RpcBreakShoji(tile.transform.position);
+
+            }
+            else
+                CmdBreakShoji(tile.transform.position);
+        }
+
 
         return moved;
     }
@@ -203,34 +255,44 @@ public class MouseMovement : NetworkBehaviour{
     {
         bool moved = false;
         Vector3 pos = positionCheese;
-        pos.z = pos.z / 10;
-        pos.x = pos.x / 10;
+        pos.z = (int) pos.z / 10;
+        pos.x = (int) pos.x / 10;
         pos.y = 0.75f;
 
         // Reutilizar el código de Mover (sacarlo a una función auxiliar)... y luego hacéis el Destroy
         if (position.z + 1 == pos.z && position.x == pos.x)
         {
-            Destroy(cheese);
+
             StartCoroutine(MoveAnimation(0, 1, positionCheese));
             moved = true;
         }
         if (position.z - 1 == pos.z && position.x == pos.x)
         {
-            Destroy(cheese);
+
             StartCoroutine(MoveAnimation(0, -1, positionCheese));
             moved = true;
         }
         if (position.z == pos.z && position.x + 1 == pos.x)
         {
-            Destroy(cheese);
+
             StartCoroutine(MoveAnimation(1, 0, positionCheese));
             moved = true;
         }
         if (position.z == pos.z && position.x - 1 == pos.x)
         {
-            Destroy(cheese);
+
             StartCoroutine(MoveAnimation(-1, 0, positionCheese));
             moved = true;
+        }
+        if (moved)
+        {
+            if (isServer)
+            {
+                RpcEatCheese(positionCheese);
+
+            }
+            else
+                CmdEatCheese(positionCheese);
         }
 
         return moved;
@@ -242,7 +304,24 @@ public class MouseMovement : NetworkBehaviour{
 
     private IEnumerator MoveAnimation(float x, float z, Vector3 position)
     {
-        for(int c=0; c<10; c++)
+        Quaternion rotation = new Quaternion();
+        if (x == 0 && z == 1)
+        {
+            rotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (x == 0 && z == -1)
+        {
+            rotation = Quaternion.Euler(0, 180, 0);
+        }
+        if (x == 1 && z == 0)
+        {
+            rotation = Quaternion.Euler(0, 90, 0);
+        }
+        if (x == -1 && z == 0)
+        {
+            rotation = Quaternion.Euler(0, 270, 0);
+        }
+        for (int c=0; c<10; c++)
         {
             Vector3 pos = this.gameObject.transform.position;
             pos.Set(pos.x + x, pos.y, pos.z + z);
@@ -251,7 +330,6 @@ public class MouseMovement : NetworkBehaviour{
         }
         Vector3 posTile = position;
         posTile.y = 0.75f;
-        Quaternion rotation = new Quaternion();
         this.gameObject.transform.SetPositionAndRotation(posTile, rotation);
     }
 

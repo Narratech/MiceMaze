@@ -46,7 +46,7 @@ public class MouseManager
 
         newPosition = position;
 
-        if (m_Movement.Move(tile, position))
+        if (m_Movement.Move(tile, position, true))
         {
 
             newPosition = tile.GetComponent<TileManager>().GetPosition();
