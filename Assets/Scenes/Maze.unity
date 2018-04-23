@@ -1580,8 +1580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NumTurnos: 8
-  m_BrokenShoji: {fileID: 1420868389094018, guid: d64c0a7ce95736049b30159136234936,
-    type: 2}
   m_StartDelay: 0
   m_EndDelay: 3
   m_Mouses:

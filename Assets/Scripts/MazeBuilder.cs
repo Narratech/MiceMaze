@@ -126,7 +126,6 @@ public class MazeBuilder: MonoBehaviour {
         int z = (int) pos.z / 10;
         return m_Maze[z*10 + x];
     }
-
 	
 	// Update is called once per frame
 	void Update () {

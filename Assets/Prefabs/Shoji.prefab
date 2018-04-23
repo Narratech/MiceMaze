@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33835817856829284}
   - component: {fileID: 65418292704762738}
   - component: {fileID: 23701204324911486}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Shoji
   m_TagString: Untagged
   m_Icon: {fileID: 0}

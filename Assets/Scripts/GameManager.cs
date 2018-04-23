@@ -8,7 +8,6 @@ public class GameManager :  NetworkBehaviour
 {
 
     public int m_NumTurnos;
-    public GameObject m_BrokenShoji;
     public float m_StartDelay = 3f;
     public float m_EndDelay = 3f;
     public GameObject[] m_Mouses = new GameObject[4];
@@ -70,16 +69,6 @@ public class GameManager :  NetworkBehaviour
     public void EatCheese(Vector3 pos)
     {
         Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
-    }
-
-    public void BreakShoji(Vector3 pos)
-    {
-        Vector3 position = manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains.gameObject.transform.position;
-        position.y = 0f;
-        Quaternion rotation = manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains.gameObject.transform.rotation;
-        GameObject brokenShoji = Instantiate(m_BrokenShoji, position, rotation);
-        Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
-        manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().SetContains(brokenShoji);
     }
 
 	public void AsignarCulpable(Color c){
