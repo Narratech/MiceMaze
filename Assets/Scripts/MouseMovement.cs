@@ -160,7 +160,10 @@ public class MouseMovement : NetworkBehaviour{
                     }
                     if (Move(hit.collider.gameObject, pos, shoji))
                     {
-						mis_puntos++;
+						if (mi_color == Color.green)
+							mis_puntos += 4;
+						else
+							mis_puntos++;
 						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
                         if (isServer)
                             RpcNotificarMovimiento();
@@ -177,7 +180,10 @@ public class MouseMovement : NetworkBehaviour{
 
                     if (Eat(hit.collider.gameObject, posCheese, pos))
                     {
-						mis_puntos += 100;
+						if (mi_color == Color.red)
+							mis_puntos += 200;
+						else
+							mis_puntos += 100;
 						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
 						if (isServer)
 							RpcTerminarJuego ();
@@ -238,6 +244,14 @@ public class MouseMovement : NetworkBehaviour{
         }
         if (moved && shoji)
         {
+			if (mi_color == Color.blue)
+				mis_puntos -= 3;
+			else if (mi_color == Color.yellow)
+				mis_puntos += 4;
+			else
+				mis_puntos++;
+			manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
+
             if (isServer)
             {
                 RpcBreakShoji(tile.transform.position);
