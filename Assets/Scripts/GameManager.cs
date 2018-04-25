@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager :  NetworkBehaviour
@@ -19,6 +20,9 @@ public class GameManager :  NetworkBehaviour
 	public Button interrogatorio;
 	public Dropdown ratones;
 
+	//Para obtener el valor del Dropdown
+	public string mensajeDropdown;
+	private int valorDropdown;
 
 	public Text puntuacion;
 	public int puntosRaton;
@@ -29,6 +33,10 @@ public class GameManager :  NetworkBehaviour
 
     [SyncVar]
     public int turno = 1;
+
+	public int ultimoTurno;
+	public Color[] coloresJugadores = new Color[4];
+	public int indice = 0;
 
 	[SyncVar]
 	public bool finJuego = false;
@@ -49,13 +57,8 @@ public class GameManager :  NetworkBehaviour
 		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
 		interrogatorio.enabled = !interrogatorio.enabled;
     }
-
-	/*public void GenerarLista(){
-		List<string> hola1 = new List<string> (){ "Rojo" };
-		ratones.AddOptions (hola1);
-		List<string> hola2 = new List<string> (){ "Verde" };
-		ratones.AddOptions (hola2);
-	}*/
+		
+		
 
 	public void GenerarLista(Color c){
 		if (c == Color.red) {
@@ -71,6 +74,9 @@ public class GameManager :  NetworkBehaviour
 			List<string> nombre = new List<string> (){ "Azul" };
 			ratones.AddOptions (nombre);
 		}
+
+		coloresJugadores [indice] = c;
+		indice++;
 	}
 
     public void IncrementaRatones()
@@ -107,15 +113,30 @@ public class GameManager :  NetworkBehaviour
         Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
         manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().SetContains(brokenShoji);
     }
-
-    public void AsignarCulpable(Color c){
-		culpable = c;
-	}
-
+		
     
 	public void FinJuego(){
+		ultimoTurno = turno;
 		turno = 0;
 		prueba.text = "SE ACABÓ";
+		culpable = coloresJugadores [ultimoTurno - 1];
+		interrogatorio.enabled = !interrogatorio.enabled;
+	}
+
+	public void FaseInterrogatorio(){
+		valorDropdown = ratones.value;
+		mensajeDropdown = ratones.options [valorDropdown].text;
+		//SceneManager.LoadScene (nombre);
+		if ((mensajeDropdown == "Azul" && culpable == Color.blue) ||
+		    (mensajeDropdown == "Rojo" && culpable == Color.red) ||
+		    (mensajeDropdown == "Amarillo" && culpable == Color.yellow) ||
+		    (mensajeDropdown == "Verde" && culpable == Color.green)) {
+
+			SceneManager.LoadScene ("EscenaWin");
+		} else {
+			SceneManager.LoadScene ("EscenaLoser");
+		}
+
 	}
     
 

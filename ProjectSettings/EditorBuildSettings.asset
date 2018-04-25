@@ -20,3 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EscenaCreditos.unity
     guid: aa456b1d3fd3c374caee5286956f6e43
+  - enabled: 1
+    path: Assets/Scenes/EscenaLoser.unity
+    guid: 7a96bf02e669fa9469f0b5d34a70268e
+  - enabled: 1
+    path: Assets/Scenes/EscenaWin.unity
+    guid: 5b104320e994a9b47826d25c26938afc

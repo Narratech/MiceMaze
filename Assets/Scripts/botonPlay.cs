@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class botonPlay : MonoBehaviour {
 
@@ -15,4 +16,5 @@ public class botonPlay : MonoBehaviour {
 		print ("Saliendo");
 		Application.Quit ();//en el modo debug no funciona, pero a la hora de exportar el proyecto si que se cierra
 	}
+		
 }

@@ -26,11 +26,7 @@ public class MouseMovement : NetworkBehaviour{
 
 	public int mis_puntos;
 
-
-	[SyncVar]
-	public bool quesoComido = false;
     
-
     [SyncVar]
     int mi_turno;
     
@@ -184,6 +180,7 @@ public class MouseMovement : NetworkBehaviour{
 							mis_puntos += 200;
 						else
 							mis_puntos += 100;
+
 						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
 						if (isServer)
 							RpcTerminarJuego ();
