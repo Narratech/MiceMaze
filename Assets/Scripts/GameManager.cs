@@ -57,8 +57,6 @@ public class GameManager :  NetworkBehaviour
 		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
 		interrogatorio.enabled = !interrogatorio.enabled;
     }
-		
-		
 
 	public void GenerarLista(Color c){
 		if (c == Color.red) {
@@ -88,6 +86,7 @@ public class GameManager :  NetworkBehaviour
 		puntosRaton = valor;
 		puntuacion.text = "" + puntosRaton;
 	}
+		
     
     public void CambiarTurno()
     {
@@ -98,6 +97,7 @@ public class GameManager :  NetworkBehaviour
         }
 		prueba.text = "" + turno;
     }
+		
 
     public void EatCheese(Vector3 pos)
     {
@@ -113,7 +113,6 @@ public class GameManager :  NetworkBehaviour
         Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
         manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().SetContains(brokenShoji);
     }
-		
     
 	public void FinJuego(){
 		ultimoTurno = turno;

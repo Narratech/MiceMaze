@@ -36,18 +36,21 @@ public class MouseMovement : NetworkBehaviour{
 
     
     private void Start()
-    {
+	{
 		Renderer[] rends = GetComponentsInChildren<Renderer> ();
-        rends[0].material.color = mi_color;
+		rends [0].material.color = mi_color;
 		mis_puntos = 0;
 
-        manager = GameObject.Find("GameManager");
-        manager.GetComponent<GameManager>().IncrementaRatones();
-		manager.GetComponent<GameManager> ().GenerarLista (mi_color);
-        m_PlayerNumber = manager.GetComponent<GameManager>().contadorRatones;
-        manager.GetComponent<GameManager>().m_Mouses[m_PlayerNumber - 1] = this.gameObject;
-        this.gameObject.transform.position = manager.GetComponent<MazeBuilder>().m_SpawnList[m_PlayerNumber - 1].transform.position;
-
+		manager = GameObject.Find ("GameManager");
+		if (mi_color != Color.magenta){
+			manager.GetComponent<GameManager> ().IncrementaRatones ();
+			manager.GetComponent<GameManager> ().GenerarLista (mi_color);
+			m_PlayerNumber = manager.GetComponent<GameManager> ().contadorRatones;
+			manager.GetComponent<GameManager> ().m_Mouses [m_PlayerNumber - 1] = this.gameObject;
+			this.gameObject.transform.position = manager.GetComponent<MazeBuilder> ().m_SpawnList [m_PlayerNumber - 1].transform.position;
+		}
+		if (mi_color == Color.magenta)
+			Destroy(this.gameObject);
     }
 		
     private void Awake()
