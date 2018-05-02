@@ -21,9 +21,9 @@ public class MouseMovement : NetworkBehaviour{
     public int m_PlayerNumber = 0;//1;
     public GameObject manager;
 
-	public bool juegoAcabado = false;
+    public bool juegoAcabado = false;
 
-	[SyncVar]
+    [SyncVar]
 	public Color mi_color = Color.red;
 
 	public int mis_puntos;
@@ -35,6 +35,7 @@ public class MouseMovement : NetworkBehaviour{
 
     public bool move = false;
     public bool te_has_movido = false;
+
     
     private void Start()
 	{
@@ -43,21 +44,21 @@ public class MouseMovement : NetworkBehaviour{
 		mis_puntos = 0;
 
 		manager = GameObject.Find ("GameManager");
-		if (mi_color != Color.magenta) {
+		if (mi_color != Color.magenta){
 			manager.GetComponent<GameManager> ().IncrementaRatones ();
 			manager.GetComponent<GameManager> ().GenerarLista (mi_color);
 			m_PlayerNumber = manager.GetComponent<GameManager> ().contadorRatones;
 			manager.GetComponent<GameManager> ().m_Mouses [m_PlayerNumber - 1] = this.gameObject;
+        
 			this.gameObject.transform.position = manager.GetComponent<MazeBuilder> ().m_SpawnList [m_PlayerNumber - 1].transform.position;
 		}
-		else{
-			manager.GetComponent<GameManager> ().tienesRatonMorado = true;
-			manager.GetComponent<GameManager> ().ratonMorado = this.gameObject;
-			gameObject.SetActive (false);
-		}
-		/*if (gameObject.activeSelf)
-			print ("Esta activado");*/
-	}
+        else
+        {
+            manager.GetComponent<GameManager>().tienesRatonMorado = true;
+            manager.GetComponent<GameManager>().ratonMorado = this.gameObject;
+            gameObject.SetActive(false);
+        }
+    }
 		
     private void Awake()
     {
@@ -72,8 +73,8 @@ public class MouseMovement : NetworkBehaviour{
 
 	[ClientRpc]
 	void RpcTerminarJuego(){
-		manager.GetComponent<GameManager> ().FinJuego (this.gameObject);
-	}
+        manager.GetComponent<GameManager>().FinJuego(this.gameObject);
+    }
 
 	[Command]
 	void CmdTerminarJuego()
@@ -96,7 +97,7 @@ public class MouseMovement : NetworkBehaviour{
     [ClientRpc]
     void RpcEatCheese(Vector3 pos)
     {
-        manager.GetComponent<GameManager>().EatCheese(pos);
+        manager.GetComponent<GameManager>().CheeseChange(pos);
     }
 
     [Command]
@@ -109,7 +110,7 @@ public class MouseMovement : NetworkBehaviour{
     void RpcBreakShoji(Vector3 pos)
     {
 
-        manager.GetComponent<GameManager>().BreakShoji(pos);
+        manager.GetComponent<GameManager>().ShojiChange(pos);
     }
 
     [Command]
@@ -123,7 +124,7 @@ public class MouseMovement : NetworkBehaviour{
     // Intentad que no haya tantas cosas en el Update, sino recurrir a eventos
     private void Update()
     {
-		juegoAcabado = manager.GetComponent<GameManager> ().juegoFinalizado;
+        juegoAcabado = manager.GetComponent<GameManager>().juegoFinalizado;
 
         RaycastHit hit;
         Ray ray;
@@ -139,12 +140,12 @@ public class MouseMovement : NetworkBehaviour{
         {
             return;
         }
-       	
-		if (mi_color == Color.magenta && juegoAcabado)
-			manager.GetComponent<GameManager> ().IniciarInterrogatorio ();
 
-		//Estoy hay que retocarlo, porque solo con el color no vale. Ya que lo cuenta como un raton
-		/*if (mi_color == Color.magenta) {
+        if (mi_color == Color.magenta && juegoAcabado)
+            manager.GetComponent<GameManager>().IniciarInterrogatorio();
+
+        //Estoy hay que retocarlo, porque solo con el color no vale. Ya que lo cuenta como un raton
+        /*if (mi_color == Color.magenta) {
 			return;
 		}*/
         // Se me hace raro verlo aquí... a lo mejor se podría recibir el clic EN GENERAL (de hecho se puede recibir el de la casilla... que
@@ -160,10 +161,10 @@ public class MouseMovement : NetworkBehaviour{
                 pos.x = (int)this.gameObject.transform.position.x / 10;
                 pos.y = 0.75f;
                 pos.z = (int)this.gameObject.transform.position.z / 10;
-                if (hit.collider.gameObject.layer == 8 || hit.collider.gameObject.layer == 10)
+                if (hit.collider.gameObject.layer == 8 || hit.collider.gameObject.layer == 10 || hit.collider.gameObject.layer == 13)
                 {
                     bool shoji = false;
-                    if (hit.collider.gameObject.layer == 10)
+                    if (hit.collider.gameObject.layer == 10 || hit.collider.gameObject.layer == 13)
                     {
                         shoji = true;
                     }
@@ -177,8 +178,12 @@ public class MouseMovement : NetworkBehaviour{
                         if (isServer)
                             RpcNotificarMovimiento();
                         else
+                        {
                             CmdNotificarMovimiento();
-                        
+                        }
+                            
+                       
+                       
                     }
                 }if(hit.collider.gameObject.layer == 9)
                 {
@@ -199,9 +204,10 @@ public class MouseMovement : NetworkBehaviour{
 							RpcTerminarJuego ();
 						else
 							CmdTerminarJuego ();
+                        
                     }
                 }
-               
+                
             }
         }
     }
@@ -261,14 +267,17 @@ public class MouseMovement : NetworkBehaviour{
 			else
 				mis_puntos++;
 			manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
-
+         
             if (isServer)
             {
                 RpcBreakShoji(tile.transform.position);
-
             }
             else
+            {
                 CmdBreakShoji(tile.transform.position);
+            }
+            manager.GetComponent<GameManager>().BreakShoji(pos);
+           
         }
 
 
@@ -310,13 +319,18 @@ public class MouseMovement : NetworkBehaviour{
         }
         if (moved)
         {
+
             if (isServer)
             {
                 RpcEatCheese(positionCheese);
 
             }
             else
+            {
                 CmdEatCheese(positionCheese);
+            }
+            manager.GetComponent<GameManager>().EatCheese(pos);
+            
         }
 
         return moved;
@@ -355,6 +369,7 @@ public class MouseMovement : NetworkBehaviour{
         Vector3 posTile = position;
         posTile.y = 0.75f;
         this.gameObject.transform.SetPositionAndRotation(posTile, rotation);
+        CheckVision();
     }
 
     public void DisableControl()
@@ -378,5 +393,54 @@ public class MouseMovement : NetworkBehaviour{
         }
     }
 
+    public void CheckVision()
+    {
+        manager.GetComponent<GameManager>().InvisibleMouses(m_PlayerNumber-1);
+        RaycastHit hit;
+        
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        {
+            CheckHit(hit);
+        }
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity))
+        {
+            CheckHit(hit);
+        }
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, Mathf.Infinity))
+        {
+            CheckHit(hit);
+        }
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, Mathf.Infinity))
+        {
+            CheckHit(hit);
+        }
 
+    }
+
+    private void CheckHit(RaycastHit hit)
+    {
+        Vector3 pos = new Vector3(hit.collider.gameObject.transform.position.x / 10, hit.collider.gameObject.transform.position.y / 10, hit.collider.gameObject.transform.position.z / 10);
+        if (hit.collider.gameObject.layer == 9)
+        {
+            if (hit.collider.gameObject.GetComponent<CheeseManager>().Eat)
+            {
+                manager.GetComponent<GameManager>().EatCheese(pos);
+            }
+        }
+        else if (hit.collider.gameObject.layer == 10)
+        {
+            if (hit.collider.gameObject.GetComponent<ShojiManager>().Broken)
+            {
+                manager.GetComponent<GameManager>().BreakShoji(pos);
+            }
+        }
+        else if (hit.collider.gameObject.layer == 12)
+        {         
+            Renderer[] rends = hit.collider.gameObject.GetComponentsInChildren<Renderer>();
+            foreach (Renderer render in rends)
+            {
+                render.enabled = true;
+            }
+        }
+    }
 }

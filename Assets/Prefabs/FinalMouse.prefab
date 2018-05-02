@@ -369,8 +369,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1925488802253488}
-  m_LocalRotation: {x: 0, y: 0.06714481, z: -0, w: -0.99774325}
-  m_LocalPosition: {x: 0, y: 1.09, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 2, z: 1.75}
   m_Children:
   - {fileID: 4113906469977840}
@@ -382,7 +382,7 @@ Transform:
   - {fileID: 4591995803363174}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 352.3, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4444014256614038
 Transform:
   m_ObjectHideFlags: 1
@@ -761,8 +761,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.3, y: 5, z: 5.7}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &114047730632282196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -844,6 +844,5 @@ MonoBehaviour:
   manager: {fileID: 0}
   mi_color: {r: 1, g: 0, b: 0, a: 1}
   mis_puntos: 6
-  quesoComido: 0
   move: 0
   te_has_movido: 0

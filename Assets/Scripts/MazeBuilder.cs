@@ -16,7 +16,7 @@ public class MazeBuilder: MonoBehaviour {
 
 
 
-    void Start(){
+    public void ChargeMaze(){
 		int rZ = 0;  //eje z rotation
 
 
