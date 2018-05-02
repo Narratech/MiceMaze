@@ -21,6 +21,8 @@ public class MouseMovement : NetworkBehaviour{
     public int m_PlayerNumber = 0;//1;
     public GameObject manager;
 
+	public bool juegoAcabado = false;
+
 	[SyncVar]
 	public Color mi_color = Color.red;
 
@@ -33,7 +35,6 @@ public class MouseMovement : NetworkBehaviour{
 
     public bool move = false;
     public bool te_has_movido = false;
-
     
     private void Start()
 	{
@@ -42,16 +43,14 @@ public class MouseMovement : NetworkBehaviour{
 		mis_puntos = 0;
 
 		manager = GameObject.Find ("GameManager");
-		if (mi_color != Color.magenta){
+		if (mi_color != Color.magenta) {
 			manager.GetComponent<GameManager> ().IncrementaRatones ();
 			manager.GetComponent<GameManager> ().GenerarLista (mi_color);
 			m_PlayerNumber = manager.GetComponent<GameManager> ().contadorRatones;
 			manager.GetComponent<GameManager> ().m_Mouses [m_PlayerNumber - 1] = this.gameObject;
 			this.gameObject.transform.position = manager.GetComponent<MazeBuilder> ().m_SpawnList [m_PlayerNumber - 1].transform.position;
 		}
-		if (mi_color == Color.magenta)
-			Destroy(this.gameObject);
-    }
+	}
 		
     private void Awake()
     {
@@ -66,7 +65,7 @@ public class MouseMovement : NetworkBehaviour{
 
 	[ClientRpc]
 	void RpcTerminarJuego(){
-		manager.GetComponent<GameManager> ().FinJuego ();
+		manager.GetComponent<GameManager> ().FinJuego (this.gameObject);
 	}
 
 	[Command]
@@ -117,7 +116,8 @@ public class MouseMovement : NetworkBehaviour{
     // Intentad que no haya tantas cosas en el Update, sino recurrir a eventos
     private void Update()
     {
-		
+		juegoAcabado = manager.GetComponent<GameManager> ().juegoFinalizado;
+
         RaycastHit hit;
         Ray ray;
         int layerMask = 1 << 8;
@@ -133,6 +133,9 @@ public class MouseMovement : NetworkBehaviour{
             return;
         }
        	
+		if (mi_color == Color.magenta && juegoAcabado)
+			manager.GetComponent<GameManager> ().IniciarInterrogatorio ();
+
 		//Estoy hay que retocarlo, porque solo con el color no vale. Ya que lo cuenta como un raton
 		/*if (mi_color == Color.magenta) {
 			return;

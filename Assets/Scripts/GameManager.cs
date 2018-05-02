@@ -38,12 +38,10 @@ public class GameManager :  NetworkBehaviour
 	public Color[] coloresJugadores = new Color[4];
 	public int indice = 0;
 
-	[SyncVar]
-	public bool finJuego = false;
-
     public int contadorRatones = 0;
 
 	public Color culpable;//color del jugador que se ha comido el queso
+	public bool juegoFinalizado = false;
 
     void Start()
     {
@@ -71,6 +69,8 @@ public class GameManager :  NetworkBehaviour
 		} else if (c == Color.blue) {
 			List<string> nombre = new List<string> (){ "Azul" };
 			ratones.AddOptions (nombre);
+		} else {
+			Destroy (GetComponent<MouseMovement> ().gameObject);
 		}
 
 		coloresJugadores [indice] = c;
@@ -114,11 +114,16 @@ public class GameManager :  NetworkBehaviour
         manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().SetContains(brokenShoji);
     }
     
-	public void FinJuego(){
+	public void FinJuego(GameObject obj){
+		juegoFinalizado = true;
 		ultimoTurno = turno;
 		turno = 0;
 		prueba.text = "SE ACABÓ";
 		culpable = coloresJugadores [ultimoTurno - 1];
+		//interrogatorio.enabled = !interrogatorio.enabled;
+	}
+
+	public void IniciarInterrogatorio(){
 		interrogatorio.enabled = !interrogatorio.enabled;
 	}
 
