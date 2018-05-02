@@ -43,6 +43,9 @@ public class GameManager :  NetworkBehaviour
 	public Color culpable;//color del jugador que se ha comido el queso
 	public bool juegoFinalizado = false;
 
+	public bool tienesRatonMorado = false;
+	public GameObject ratonMorado;
+
     void Start()
     {
         manager = GameObject.Find("GameManager");
@@ -120,6 +123,8 @@ public class GameManager :  NetworkBehaviour
 		turno = 0;
 		prueba.text = "SE ACABÓ";
 		culpable = coloresJugadores [ultimoTurno - 1];
+		if (tienesRatonMorado)
+			ratonMorado.SetActive (true);
 		//interrogatorio.enabled = !interrogatorio.enabled;
 	}
 

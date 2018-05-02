@@ -50,6 +50,13 @@ public class MouseMovement : NetworkBehaviour{
 			manager.GetComponent<GameManager> ().m_Mouses [m_PlayerNumber - 1] = this.gameObject;
 			this.gameObject.transform.position = manager.GetComponent<MazeBuilder> ().m_SpawnList [m_PlayerNumber - 1].transform.position;
 		}
+		else{
+			manager.GetComponent<GameManager> ().tienesRatonMorado = true;
+			manager.GetComponent<GameManager> ().ratonMorado = this.gameObject;
+			gameObject.SetActive (false);
+		}
+		/*if (gameObject.activeSelf)
+			print ("Esta activado");*/
 	}
 		
     private void Awake()
