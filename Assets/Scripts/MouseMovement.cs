@@ -329,7 +329,7 @@ public class MouseMovement : NetworkBehaviour{
             {
                 CmdEatCheese(positionCheese);
             }
-            manager.GetComponent<GameManager>().EatCheese(pos);
+            manager.GetComponent<GameManager>().EatCheese(positionCheese);
             
         }
 
