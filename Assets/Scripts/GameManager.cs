@@ -49,6 +49,8 @@ public class GameManager :  NetworkBehaviour
     public bool tienesRatonMorado = false;
     public GameObject ratonMorado;
 
+ 
+
     void Start()
     {
         manager = GameObject.Find("GameManager");
@@ -88,7 +90,7 @@ public class GameManager :  NetworkBehaviour
             Destroy(GetComponent<MouseMovement> ().gameObject);
         }
 
-coloresJugadores [indice] = c;
+        coloresJugadores [indice] = c;
 		indice++;
 	}
 
@@ -118,7 +120,7 @@ coloresJugadores [indice] = c;
     public void EatCheese(Vector3 pos)
     {
         
-        Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
+        manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains.SetActive(false);
     }
 
     public void CheeseChange(Vector3 pos)
@@ -149,16 +151,15 @@ coloresJugadores [indice] = c;
         float c = pos.x;
     }
 
-    public void FinJuego(GameObject obj)
+    public void FinJuego()
     {
         juegoFinalizado = true;
         ultimoTurno = turno;
         turno = 0;
         prueba.text = "SE ACABÓ";
         culpable = coloresJugadores[ultimoTurno - 1];
-        if (tienesRatonMorado)
-            ratonMorado.SetActive(true);
-        //interrogatorio.enabled = !interrogatorio.enabled;
+        /*if (tienesRatonMorado)
+            ratonMorado.SetActive(true);*/
     }
 
     public void IniciarInterrogatorio()

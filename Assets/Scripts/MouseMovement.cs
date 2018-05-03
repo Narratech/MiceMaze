@@ -36,6 +36,8 @@ public class MouseMovement : NetworkBehaviour{
     public bool move = false;
     public bool te_has_movido = false;
 
+    private int max_turnos = 10;
+
     
     private void Start()
 	{
@@ -54,10 +56,16 @@ public class MouseMovement : NetworkBehaviour{
 		}
         else
         {
-            manager.GetComponent<GameManager>().tienesRatonMorado = true;
+            
             manager.GetComponent<GameManager>().ratonMorado = this.gameObject;
-            gameObject.SetActive(false);
+            
+            foreach (Renderer render in rends)
+            {
+                render.enabled = false;
+            }
+            //gameObject.SetActive(false);
         }
+      
     }
 		
     private void Awake()
@@ -73,7 +81,7 @@ public class MouseMovement : NetworkBehaviour{
 
 	[ClientRpc]
 	void RpcTerminarJuego(){
-        manager.GetComponent<GameManager>().FinJuego(this.gameObject);
+        manager.GetComponent<GameManager>().FinJuego();
     }
 
 	[Command]
@@ -140,6 +148,8 @@ public class MouseMovement : NetworkBehaviour{
         {
             return;
         }
+       
+        
 
         if (mi_color == Color.magenta && juegoAcabado)
             manager.GetComponent<GameManager>().IniciarInterrogatorio();
@@ -200,11 +210,11 @@ public class MouseMovement : NetworkBehaviour{
 							mis_puntos += 100;
 
 						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
-						if (isServer)
-							RpcTerminarJuego ();
-						else
-							CmdTerminarJuego ();
-                        
+
+                        if (isServer)
+                            RpcTerminarJuego();
+                        else
+                            CmdTerminarJuego();
                     }
                 }
                 
@@ -320,10 +330,10 @@ public class MouseMovement : NetworkBehaviour{
         if (moved)
         {
 
+            GameManager gm = manager.GetComponent<GameManager>();
             if (isServer)
             {
                 RpcEatCheese(positionCheese);
-
             }
             else
             {
