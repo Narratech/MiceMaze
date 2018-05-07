@@ -16,5 +16,14 @@ public class botonPlay : MonoBehaviour {
 		print ("Saliendo");
 		Application.Quit ();//en el modo debug no funciona, pero a la hora de exportar el proyecto si que se cierra
 	}
+
+	public void ProbandoEscenaAditiva(string nombre){
+		SceneManager.LoadScene (nombre, LoadSceneMode.Additive);
+	}
+
+	public void SalirEscenaAditiva(string nombre){
+		SceneManager.UnloadSceneAsync (nombre);
+	}
+
 		
 }

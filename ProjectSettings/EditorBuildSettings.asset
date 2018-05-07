@@ -26,3 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EscenaWin.unity
     guid: 5b104320e994a9b47826d25c26938afc
+  - enabled: 1
+    path: Assets/Scenes/Escena.unity
+    guid: 597e07bac3e0f154497d17a5f6ace73a

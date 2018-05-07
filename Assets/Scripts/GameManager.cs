@@ -49,7 +49,11 @@ public class GameManager :  NetworkBehaviour
     public bool tienesRatonMorado = false;
     public GameObject ratonMorado;
 
- 
+ 	//PARA EL INTERROGATORIO
+	public Dropdown ratonPreguntado;
+	public Dropdown preguntoPor;
+
+	public GameObject panelInterrogatorio;
 
     void Start()
     {
@@ -70,21 +74,34 @@ public class GameManager :  NetworkBehaviour
 		puntuacion.text = "" + puntosRaton;
 		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
 		interrogatorio.enabled = !interrogatorio.enabled;
+		//panelInterrogatorio.SetActive (false);
     }
+
+	public void ActivarInterroagatorio(){
+		panelInterrogatorio.SetActive (true);
+	}
 
 	public void GenerarLista(Color c){
 		if (c == Color.red) {
 			List<string> nombre = new List<string> (){ "Rojo" };
 			ratones.AddOptions (nombre);
+			ratonPreguntado.AddOptions(nombre);
+			preguntoPor.AddOptions(nombre);
 		} else if (c == Color.green) {
 			List<string> nombre = new List<string> (){ "Verde" };
 			ratones.AddOptions (nombre);
+			ratonPreguntado.AddOptions(nombre);
+			preguntoPor.AddOptions(nombre);
 		} else if (c == Color.yellow) {
 			List<string> nombre = new List<string> (){ "Amarillo" };
 			ratones.AddOptions (nombre);
+			ratonPreguntado.AddOptions(nombre);
+			preguntoPor.AddOptions(nombre);
 		} else if (c == Color.blue) {
 			List<string> nombre = new List<string> (){ "Azul" };
 			ratones.AddOptions (nombre);
+			ratonPreguntado.AddOptions(nombre);
+			preguntoPor.AddOptions(nombre);
 		} else {
 
             Destroy(GetComponent<MouseMovement> ().gameObject);
@@ -158,6 +175,7 @@ public class GameManager :  NetworkBehaviour
         turno = 0;
         prueba.text = "SE ACABÓ";
         culpable = coloresJugadores[ultimoTurno - 1];
+		//panelInterrogatorio.SetActive (true);
         /*if (tienesRatonMorado)
             ratonMorado.SetActive(true);*/
     }
@@ -188,7 +206,7 @@ public class GameManager :  NetworkBehaviour
     }
 
 
-    // Update is called once per frame
+    
     private IEnumerator GameLoop()
     {
     

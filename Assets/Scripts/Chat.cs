@@ -7,17 +7,33 @@ using UnityEngine.Networking;
 public class Chat : NetworkBehaviour {
 
 	Text texto;
-	InputField input;
+	//InputField input;
 	public MouseMovement raton;
-	//public Color probando;
 	public string colorJugador;
+
+	Dropdown ratonPreguntado;
+	Dropdown preguntoPor;
+
+	InputField columna;
+	InputField fila;
+
+
+	public string mensajeDropdown;
+	private int valorDropdown;
+
+	//Button preguntado;
 
 	// Use this for initialization
 	void Start () {
-		texto = GameObject.Find ("PanelTexto").GetComponent<Text> ();
+		/*texto = GameObject.Find ("PanelTexto").GetComponent<Text> ();
 		input = GameObject.Find ("EntradaTexto").GetComponent<InputField> ();
-		//probando = raton.mi_color;
-		asignarColor ();
+		asignarColor ();*/
+		texto = GameObject.Find ("PanelTexto").GetComponent<Text> ();
+		ratonPreguntado = GameObject.Find ("Raton1").GetComponent<Dropdown> ();
+		preguntoPor = GameObject.Find ("Raton2").GetComponent<Dropdown> ();
+		columna = GameObject.Find ("EntradaColumna").GetComponent<InputField> ();
+		fila = GameObject.Find ("EntradaFila").GetComponent<InputField> ();
+		//preguntado = GameObject.Find ("BotonPreguntado").GetComponent<Button> ();
 	}
 
 	void asignarColor(){
@@ -31,9 +47,35 @@ public class Chat : NetworkBehaviour {
 			colorJugador = "Azul";
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update(){
+		if (!isLocalPlayer)
+			return;
+
+		if (Input.GetKeyDown (KeyCode.Return)) {
+			valorDropdown = ratonPreguntado.value;
+			mensajeDropdown = ratonPreguntado.options [valorDropdown].text;
+			string col = columna.text;
+			string fil = fila.text;
+			string mensaje = "Raton " + mensajeDropdown; //+ " has visto al raton ";
+
+			valorDropdown = preguntoPor.value;
+			mensajeDropdown = preguntoPor.options [valorDropdown].text;
+			if (mensajeDropdown == "Nadie")
+				mensaje += " en la posicion (" + col + "," + fil + ")";
+			else {
+				mensaje += " has visto al raton " + mensajeDropdown + " en la posicion (" + col + "," + fil + ")";
+			}
+			columna.text = "";
+			fila.text = "";
+
+			CmdEnviar (mensaje);
+		}
+
+	}
+
+
+	/*void Update () {
 
 		if (!isLocalPlayer)
 			return;
@@ -46,7 +88,7 @@ public class Chat : NetworkBehaviour {
 				CmdEnviar (mensaje);
 			}
 		}
-	}
+	}*/
 
 	[Command]
 	void CmdEnviar(string mensaje){
