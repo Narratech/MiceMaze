@@ -13,6 +13,7 @@ public class Chat : NetworkBehaviour {
 
 	Dropdown ratonPreguntado;
 	Dropdown preguntoPor;
+	Dropdown accionesPosibles;
 
 	InputField columna;
 	InputField fila;
@@ -26,14 +27,14 @@ public class Chat : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
 		/*texto = GameObject.Find ("PanelTexto").GetComponent<Text> ();
-		input = GameObject.Find ("EntradaTexto").GetComponent<InputField> ();
-		asignarColor ();*/
+		input = GameObject.Find ("EntradaTexto").GetComponent<InputField> ();*/
+		asignarColor ();
 		texto = GameObject.Find ("PanelTexto").GetComponent<Text> ();
 		ratonPreguntado = GameObject.Find ("Raton1").GetComponent<Dropdown> ();
 		preguntoPor = GameObject.Find ("Raton2").GetComponent<Dropdown> ();
 		columna = GameObject.Find ("EntradaColumna").GetComponent<InputField> ();
 		fila = GameObject.Find ("EntradaFila").GetComponent<InputField> ();
-		//preguntado = GameObject.Find ("BotonPreguntado").GetComponent<Button> ();
+		accionesPosibles = GameObject.Find ("DropdownAcciones").GetComponent<Dropdown> ();
 	}
 
 	void asignarColor(){
@@ -52,7 +53,7 @@ public class Chat : NetworkBehaviour {
 		if (!isLocalPlayer)
 			return;
 
-		if (Input.GetKeyDown (KeyCode.Return)) {
+		/*if (Input.GetKeyDown (KeyCode.Return)) {
 			valorDropdown = ratonPreguntado.value;
 			mensajeDropdown = ratonPreguntado.options [valorDropdown].text;
 			string col = columna.text;
@@ -70,25 +71,57 @@ public class Chat : NetworkBehaviour {
 			fila.text = "";
 
 			CmdEnviar (mensaje);
+		}*/
+
+		string ratonInterrogado;//raton que está siendo interrogado
+		string preguntaSobre;//raton sobre el que estás preguntando
+		string col;//columna
+		string fil;//fila
+		string accion;//accion sobre la que quieres preguntar
+		string mensaje;//mensaje que se va a producir para hacer la pregunta
+
+		valorDropdown = ratonPreguntado.value;
+		ratonInterrogado = ratonPreguntado.options [valorDropdown].text;
+
+		valorDropdown = preguntoPor.value;
+		preguntaSobre = preguntoPor.options [valorDropdown].text;
+
+		valorDropdown = accionesPosibles.value;
+		accion = accionesPosibles.options [valorDropdown].text;
+
+		col = columna.text;
+		fil = fila.text;
+
+		if (Input.GetKeyDown (KeyCode.Return)) {
+			columna.text = "";
+			fila.text = "";
+
+			mensaje = "Raton " + ratonInterrogado;
+
+			if (preguntaSobre == "Nadie") {
+				mensaje += " ¿Has visto a alguien";
+			} else {
+				mensaje += " ¿Has visto al raton " + preguntaSobre;
+			}
+
+			if (accion == "Comer Queso")
+				mensaje += " comerse el queso";
+			else if (accion == "Romper Shoji")
+				mensaje += " romer un shoji";
+			else if (accion == "Jugar")
+				mensaje += " jugar";
+
+			if (col == "" || fil == "") {
+				mensaje += "?";
+			} else {
+				mensaje += " en la posicion (" + col + "," + fil + ")?";
+			}
+			
+			CmdEnviar (mensaje);
 		}
 
 	}
-
-
-	/*void Update () {
-
-		if (!isLocalPlayer)
-			return;
-
-		if (Input.GetKeyDown (KeyCode.Return)) {
-			if (input.text != "") {
-				string mensaje = input.text;
-				input.text = "";
-
-				CmdEnviar (mensaje);
-			}
-		}
-	}*/
+		
 
 	[Command]
 	void CmdEnviar(string mensaje){

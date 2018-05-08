@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -88,7 +88,6 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -138,7 +137,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 225917674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 14}
+  m_LocalPosition: {x: -62, y: -44, z: 14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 306613988}
@@ -377,7 +376,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Saltar
 --- !u!222 &306613990
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -460,31 +459,49 @@ MonoBehaviour:
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "Explicar rat\xF3n 1"
+  - vMessage: "El rat\xF3n azul pierde puntos si hace cosas malas, como romper puertas
+      (Gana puntos jugando con otros ratones)"
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "Explicar rat\xF3n 2"
+  - vMessage: "Al rat\xF3n verde es un culo inquieto, no puede estarse quieto (Gana
+      m\xE1s puntos por moverse) "
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "Explicar rat\xF3n 3"
+  - vMessage: "El rat\xF3n rojo es un glot\xF3n. S\xF3lo piensa en comerse el queso
+      (Gana una gran cantidad de puntos por coemrse el queso)"
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "Explicar rat\xF3n 4"
+  - vMessage: "El rat\xF3n amarillo es un cabr\xF3n, s\xF3lo piensa en liarla parda
+      (Gana puntos rompiendo puertas)"
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: Explicar en que consiste el interrogatorio
+  - vMessage: "Una vez finalicen los turnos, el juego pasar\xE1 a la fase del interrogatorio."
+    vMessageForm: 0
+    vBorderColor: {r: 1, g: 1, b: 1, a: 0}
+    vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
+    vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
+    vClickToCloseBubble: 1
+  - vMessage: "En dicha fase el jugador de color morado o magenta deber\xE1 interrogar
+      a los ratones para descubrir quien se ha comido el queso"
+    vMessageForm: 0
+    vBorderColor: {r: 1, g: 1, b: 1, a: 0}
+    vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
+    vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
+    vClickToCloseBubble: 1
+  - vMessage: "Si tienes alguna duda puedo volver a repetirtelo. Pulsa de nuevo sobre
+      m\xED."
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
@@ -587,6 +604,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &959867711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 959867712}
+  - component: {fileID: 959867714}
+  - component: {fileID: 959867713}
+  m_Layer: 5
+  m_Name: Ayuda
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &959867712
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 959867711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -95.09999, y: 136, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1773416842}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -95.1, y: 136}
+  m_SizeDelta: {x: 350.1, y: 113.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &959867713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 959867711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Haz clik en el cient\xEDfico para que te explique en que consiste MiceMaze"
+--- !u!222 &959867714
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 959867711}
 --- !u!1 &1032473082
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +761,6 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -843,10 +933,11 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1773416838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 512, y: 384, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 225917675}
+  - {fileID: 959867712}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

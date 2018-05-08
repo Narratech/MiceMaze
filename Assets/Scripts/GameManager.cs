@@ -39,8 +39,6 @@ public class GameManager :  NetworkBehaviour
 	public Color[] coloresJugadores = new Color[4];
 	public int indice = 0;
 
-
-
     public int contadorRatones = 0;
 
 	public Color culpable;//color del jugador que se ha comido el queso
