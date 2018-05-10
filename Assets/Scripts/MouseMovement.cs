@@ -169,10 +169,10 @@ public class MouseMovement : NetworkBehaviour{
                 pos.x = (int)this.gameObject.transform.position.x / 10;
                 pos.y = 0.75f;
                 pos.z = (int)this.gameObject.transform.position.z / 10;
-                if (hit.collider.gameObject.layer == 8 || hit.collider.gameObject.layer == 10 || hit.collider.gameObject.layer == 13)
+                if (hit.collider.gameObject.layer == 8 || hit.collider.gameObject.layer == 10 || hit.collider.gameObject.layer == 13 || hit.collider.gameObject.layer == 12)
                 {
                     bool shoji = false;
-                    if (hit.collider.gameObject.layer == 10 || hit.collider.gameObject.layer == 13)
+                    if (hit.collider.gameObject.layer == 10 || hit.collider.gameObject.layer == 13 || hit.collider.gameObject.layer == 12)
                     {
                         shoji = true;
                     }

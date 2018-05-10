@@ -59,6 +59,7 @@ public class GameManager :  NetworkBehaviour
 
     void Start()
     {
+        var configuration = ConfigurationXml.Load();
         manager = GameObject.Find("GameManager");
         manager.GetComponent<MazeBuilder>().ChargeMaze();
         int c = 0;

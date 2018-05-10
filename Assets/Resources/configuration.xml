@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Configuration>
-	<Mouses number = "4">
-		<Mouse IA = "false">
-			<Code></Code>
-			<Color>
-				<Red>0</Red>
-				<Green>0</Green>
-				<Blue>0</Blue>
-			</Color>
+	<Mouses>
+		<Mouse IA = "0">
+
+      <IAType>Random</IAType>
+		  <Red>0</Red>
+		  <Green>0</Green>
+		  <Blue>0</Blue>
+	
 		</Mouse>
-		<Mouse IA = "false">
-			<Code></Code>
-			<Color>
-				<Red>0</Red>
-				<Green>0</Green>
-				<Blue>0</Blue>
-			</Color>
+		<Mouse IA = "0">
+
+      <IAType>Random</IAType>
+		  <Red>0</Red>
+		  <Green>0</Green>
+			<Blue>0</Blue>
+
 		</Mouse>
-		<Mouse IA = "true">
-			<Color>
-				<Red>0</Red>
-				<Green>0</Green>
-				<Blue>0</Blue>
-			</Color>
+		<Mouse IA = "0">
+
+       <IAType>Random</IAType>
+			<Red>0</Red>
+			<Green>0</Green>
+			<Blue>0</Blue>
+
 		</Mouse>
-		<Mouse IA = "true">
-			<Color>
-				<Red>0</Red>
-				<Green>0</Green>
-				<Blue>0</Blue>
-			</Color>
+		<Mouse IA = "0">
+
+      <IAType>Random</IAType>
+			<Red>0</Red>
+      <Green>0</Green>
+			<Blue>0</Blue>
+			
 		</Mouse>
 	</Mouses>
 	<Maze>Maze</Maze>
+  <ScientificIA>0</ScientificIA>
+  <ScientificIAType>Random</ScientificIAType>
 	<NumberTurnsMaze>10</NumberTurnsMaze>
 	<NumberTurnsInterrogation>10</NumberTurnsInterrogation>
-	<ScientificIA>false</ScientificIA>
+  <TotalVision>0</TotalVision>
+	
 
 </Configuration>
