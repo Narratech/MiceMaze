@@ -14,8 +14,6 @@ using UnityEngine.UI;
 
 // Renombrad ahora como el MouseManager
 public class MouseMovement : NetworkBehaviour{
-	//SE LE ASIGNA AL CIENTIFICO EL COLOR MAGENTA, ES DECIR, Color.magenta
-	//EL RESTO DE COLORES CORRESPONDEN A UN JUGADOR DE TIPO RATON
 
     [SyncVar]
     public int m_PlayerNumber = 0;//1;
@@ -36,7 +34,7 @@ public class MouseMovement : NetworkBehaviour{
     public bool move = false;
     public bool te_has_movido = false;
 
-    private int max_turnos = 10;
+    public int max_turnos = 10;
 
     
     private void Start()
@@ -47,6 +45,7 @@ public class MouseMovement : NetworkBehaviour{
 
 		manager = GameObject.Find ("GameManager");
 		if (mi_color != Color.magenta){
+			//manager.GetComponent<GameManager> ().panelResto.SetActive (false);
 			manager.GetComponent<GameManager> ().IncrementaRatones ();
 			manager.GetComponent<GameManager> ().GenerarLista (mi_color);
 			m_PlayerNumber = manager.GetComponent<GameManager> ().contadorRatones;
@@ -55,7 +54,7 @@ public class MouseMovement : NetworkBehaviour{
 		}
         else
         {
-            
+			//manager.GetComponent<GameManager> ().panelOtros.SetActive (false);
             manager.GetComponent<GameManager>().ratonMorado = this.gameObject;
             
             foreach (Renderer render in rends)
@@ -210,10 +209,10 @@ public class MouseMovement : NetworkBehaviour{
 
 						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
 
-                        if (isServer)
+                        /*if (isServer)
                             RpcTerminarJuego();
                         else
-                            CmdTerminarJuego();
+                            CmdTerminarJuego();*/
                     }
                 }
                 

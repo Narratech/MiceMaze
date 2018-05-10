@@ -50,8 +50,12 @@ public class GameManager :  NetworkBehaviour
  	//PARA EL INTERROGATORIO
 	public Dropdown ratonPreguntado;
 	public Dropdown preguntoPor;
+	//FIN
 
-	public GameObject panelInterrogatorio;
+	public GameObject panelOtros;
+	public GameObject panelResto;
+
+	public int totalTurnos = 20;
 
     void Start()
     {
@@ -72,11 +76,11 @@ public class GameManager :  NetworkBehaviour
 		puntuacion.text = "" + puntosRaton;
 		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
 		interrogatorio.enabled = !interrogatorio.enabled;
-		//panelInterrogatorio.SetActive (false);
     }
 
-	public void ActivarInterroagatorio(){
-		panelInterrogatorio.SetActive (true);
+	void Update(){
+		if (totalTurnos == 0)
+			FinJuego ();
 	}
 
 	public void GenerarLista(Color c){
@@ -127,7 +131,7 @@ public class GameManager :  NetworkBehaviour
         {
             turno = 1;
         }
-
+		totalTurnos--;
 		prueba.text = "" + turno;
     }
 		
@@ -173,7 +177,6 @@ public class GameManager :  NetworkBehaviour
         turno = 0;
         prueba.text = "SE ACABÓ";
         culpable = coloresJugadores[ultimoTurno - 1];
-		//panelInterrogatorio.SetActive (true);
         /*if (tienesRatonMorado)
             ratonMorado.SetActive(true);*/
     }
