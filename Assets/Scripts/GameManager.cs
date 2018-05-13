@@ -50,10 +50,12 @@ public class GameManager :  NetworkBehaviour
  	//PARA EL INTERROGATORIO
 	public Dropdown ratonPreguntado;
 	public Dropdown preguntoPor;
+	public Dropdown dropdownratones;
 	//FIN
 
 	public GameObject panelOtros;
 	public GameObject panelResto;
+	public GameObject panelChat;
 
 	public int totalTurnos = 20;
 
@@ -90,21 +92,25 @@ public class GameManager :  NetworkBehaviour
 			ratones.AddOptions (nombre);
 			ratonPreguntado.AddOptions(nombre);
 			preguntoPor.AddOptions(nombre);
+			dropdownratones.AddOptions (nombre);
 		} else if (c == Color.green) {
 			List<string> nombre = new List<string> (){ "Verde" };
 			ratones.AddOptions (nombre);
 			ratonPreguntado.AddOptions(nombre);
 			preguntoPor.AddOptions(nombre);
+			dropdownratones.AddOptions (nombre);
 		} else if (c == Color.yellow) {
 			List<string> nombre = new List<string> (){ "Amarillo" };
 			ratones.AddOptions (nombre);
 			ratonPreguntado.AddOptions(nombre);
 			preguntoPor.AddOptions(nombre);
+			dropdownratones.AddOptions (nombre);
 		} else if (c == Color.blue) {
 			List<string> nombre = new List<string> (){ "Azul" };
 			ratones.AddOptions (nombre);
 			ratonPreguntado.AddOptions(nombre);
 			preguntoPor.AddOptions(nombre);
+			dropdownratones.AddOptions (nombre);
 		} else {
 
             Destroy(GetComponent<MouseMovement> ().gameObject);

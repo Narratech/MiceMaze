@@ -63,6 +63,13 @@ public class MouseMovement : NetworkBehaviour{
             }
             //gameObject.SetActive(false);
         }
+
+		manager.GetComponent<GameManager> ().panelChat.SetActive (true);
+		if (isLocalPlayer && mi_color == Color.magenta) {
+			manager.GetComponent<GameManager>().panelResto.SetActive(true);
+		} else if (isLocalPlayer) {
+			manager.GetComponent<GameManager>().panelOtros.SetActive(true);
+		}
       
     }
 		
@@ -131,6 +138,19 @@ public class MouseMovement : NetworkBehaviour{
     private void Update()
     {
         juegoAcabado = manager.GetComponent<GameManager>().juegoFinalizado;
+
+		if (juegoAcabado) {
+			manager.GetComponent<GameManager> ().panelChat.SetActive (true);
+			if (isLocalPlayer && mi_color == Color.magenta) {
+				manager.GetComponent<GameManager> ().panelResto.SetActive (true);
+			} else if (isLocalPlayer) {
+				manager.GetComponent<GameManager> ().panelOtros.SetActive (true);
+			}
+		} else {
+			manager.GetComponent<GameManager> ().panelResto.SetActive (false);
+			manager.GetComponent<GameManager> ().panelOtros.SetActive (false);
+			manager.GetComponent<GameManager> ().panelChat.SetActive (false);
+		}
 
         RaycastHit hit;
         Ray ray;
