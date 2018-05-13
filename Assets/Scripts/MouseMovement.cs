@@ -183,12 +183,7 @@ public class MouseMovement : NetworkBehaviour{
 						else
 							mis_puntos++;
 						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
-                        if (isServer)
-                            RpcNotificarMovimiento();
-                        else
-                        {
-                            CmdNotificarMovimiento();
-                        }
+                        
                             
                        
                        
@@ -263,7 +258,8 @@ public class MouseMovement : NetworkBehaviour{
                 StartCoroutine(MoveAnimation(-1, 0, tile.transform.position));
                 moved = true;
             }
-           
+
+
 
         }
         if (moved && shoji)
@@ -377,7 +373,12 @@ public class MouseMovement : NetworkBehaviour{
         Vector3 posTile = position;
         posTile.y = 0.75f;
         this.gameObject.transform.SetPositionAndRotation(posTile, rotation);
-        //CheckVision();
+        if (isServer)
+            RpcNotificarMovimiento();
+        else
+        {
+            CmdNotificarMovimiento();
+        }
     }
 
     public void DisableControl()
