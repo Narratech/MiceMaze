@@ -429,34 +429,59 @@ public class MouseMovement : NetworkBehaviour{
             return;
         }
         RaycastHit hit;
-        
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        Vector3 position = this.transform.position;
+        bool foundChange = false;
+        do
         {
-            CheckHit(hit);
-        }
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            {
+                foundChange = CheckHit(hit);
+            }
+            position = hit.collider.transform.position;
+        } while (foundChange);
+        position = this.transform.position;
+        foundChange = false;
+        do
         {
-            CheckHit(hit);
-        }
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity))
+            {
+                foundChange = CheckHit(hit);
+            }
+            position = hit.collider.transform.position;
+        } while (foundChange);
+        position = this.transform.position;
+        foundChange = false;
+        do
         {
-            CheckHit(hit);
-        }
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, Mathf.Infinity))
+            {
+                foundChange = CheckHit(hit);
+            }
+            position = hit.collider.transform.position;
+        } while (foundChange);
+        position = this.transform.position;
+        foundChange = false;
+        do
         {
-            CheckHit(hit);
-        }
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, Mathf.Infinity))
+            {
+                foundChange = CheckHit(hit);
+            }
+            position = hit.collider.transform.position;
+        } while (foundChange);
 
     }
 
-    private void CheckHit(RaycastHit hit)
+    private bool CheckHit(RaycastHit hit)
     {
+        bool foundChange = false;
         Vector3 pos = new Vector3(hit.collider.gameObject.transform.position.x / 10, hit.collider.gameObject.transform.position.y / 10, hit.collider.gameObject.transform.position.z / 10);
         if (hit.collider.gameObject.layer == 9)
         {
             if (hit.collider.gameObject.GetComponent<CheeseManager>().Eat)
             {
                 manager.GetComponent<GameManager>().EatCheese(pos);
+                foundChange = true;
             }
         }
         else if (hit.collider.gameObject.layer == 10)
@@ -464,6 +489,7 @@ public class MouseMovement : NetworkBehaviour{
             if (hit.collider.gameObject.GetComponent<ShojiManager>().Broken)
             {
                 manager.GetComponent<GameManager>().BreakShoji(pos);
+                foundChange = true;
             }
         }
         else if (hit.collider.gameObject.layer == 12)
@@ -473,7 +499,9 @@ public class MouseMovement : NetworkBehaviour{
             {
                 render.enabled = true;
             }
+            foundChange = true;
         }
+        return foundChange;
     }
 
     public void DoInvisible()
