@@ -68,7 +68,7 @@ public class GameManager :  NetworkBehaviour
             m_Tiles[c] = manager.GetComponent<MazeBuilder>().m_Maze[c].GetComponent<TileManager>();
             c++;
         }
-        
+
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
 		prueba.color = Color.red;
@@ -127,6 +127,8 @@ public class GameManager :  NetworkBehaviour
     
     public void CambiarTurno()
     {
+        InvisibleMouses();
+        CheckVision();
         turno++;
         if(turno > contadorRatones)
         {
@@ -209,49 +211,8 @@ public class GameManager :  NetworkBehaviour
 
 
     
-    private IEnumerator GameLoop()
-    {
     
-        yield return StartCoroutine(RoundStarting());
-
-        yield return StartCoroutine(RoundPlaying());
-
-        yield return StartCoroutine(RoundEnding());
-    }
-
-    private IEnumerator RoundStarting()
-    {
-        
-        DisableMouseControl();
-       
-        yield return m_StartWait;
-    }
-
-    private IEnumerator RoundPlaying()
-    {
-        for (int c = 0; c<m_NumTurnos; c++)
-        {
-            for(int i = 0; i<contadorRatones; i++)
-            {
-                EnableMouseControl(i);
-                while (!m_Mouses[i].GetComponent<MouseMovement>().move)
-                {
-                    yield return null;
-                }
-                DisableMouseControl();
-            }
-        }
-       
-    }
-
-    private IEnumerator RoundEnding()
-    {
-        DisableMouseControl();
-
-        yield return m_EndWait;
-    }
-
-    // This function is used to turn all the tanks back on and reset their positions and properties.
+    
  
 
     private void EnableMousesControl()
@@ -277,21 +238,22 @@ public class GameManager :  NetworkBehaviour
         }
     }
 
-    public void InvisibleMouses(int playerMouse)
+    private void InvisibleMouses()
     {
        for(int c = 0; c< contadorRatones; c++)
        {
-            if(c != playerMouse)
-            {
-                Renderer[] rends = m_Mouses[c].GetComponentsInChildren<Renderer>();
-                foreach(Renderer render in rends)
-                {
-                    render.enabled = false;
-                }
-               
-
-            } 
+            m_Mouses[c].GetComponent<MouseMovement>().DoInvisible();
+            
        }
+    }
+
+    private void CheckVision()
+    {
+        for (int c = 0; c < contadorRatones; c++)
+        {
+            m_Mouses[c].GetComponent<MouseMovement>().CheckVision();
+
+        }
     }
 
 }

@@ -377,7 +377,7 @@ public class MouseMovement : NetworkBehaviour{
         Vector3 posTile = position;
         posTile.y = 0.75f;
         this.gameObject.transform.SetPositionAndRotation(posTile, rotation);
-        CheckVision();
+        //CheckVision();
     }
 
     public void DisableControl()
@@ -403,7 +403,10 @@ public class MouseMovement : NetworkBehaviour{
 
     public void CheckVision()
     {
-        manager.GetComponent<GameManager>().InvisibleMouses(m_PlayerNumber-1);
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         RaycastHit hit;
         
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
@@ -451,4 +454,17 @@ public class MouseMovement : NetworkBehaviour{
             }
         }
     }
+
+    public void DoInvisible()
+    {
+        if (!isLocalPlayer)
+        {
+            Renderer[] rends = this.GetComponentsInChildren<Renderer>();
+            foreach (Renderer render in rends)
+            {
+                render.enabled = false;
+            }
+        }
+    }
+
 }
