@@ -73,8 +73,8 @@ public class GameManager :  NetworkBehaviour
 
         m_StartWait = new WaitForSeconds(m_StartDelay);
         m_EndWait = new WaitForSeconds(m_EndDelay);
-		prueba.color = Color.red;
-		prueba.text = "" + turno;
+		/*prueba.color = Color.red;
+		prueba.text = "" + turno;*/
 		puntosRaton = 0;
 		puntuacion.text = "" + puntosRaton;
 		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
@@ -118,6 +118,9 @@ public class GameManager :  NetworkBehaviour
 
         coloresJugadores [indice] = c;
 		indice++;
+
+		prueba.color = coloresJugadores [turno - 1];
+		ponerColor (coloresJugadores [turno - 1]);
 	}
 
     public void IncrementaRatones()
@@ -130,6 +133,16 @@ public class GameManager :  NetworkBehaviour
 		puntuacion.text = "" + puntosRaton;
 	}
 		
+	void ponerColor(Color c){
+		if (c == Color.red)
+			prueba.text = "Rojo";
+		else if (c == Color.green)
+			prueba.text = "Verde";
+		else if (c == Color.blue)
+			prueba.text = "Azul";
+		else if (c == Color.yellow)
+			prueba.text = "Amarillo";
+	}
     
     public void CambiarTurno()
     {
@@ -141,7 +154,9 @@ public class GameManager :  NetworkBehaviour
             turno = 1;
         }
 		totalTurnos--;
-		prueba.text = "" + turno;
+		//prueba.text = "" + turno;
+		prueba.color = coloresJugadores[turno - 1];
+		ponerColor (coloresJugadores [turno - 1]);
     }
 		
 
@@ -155,6 +170,10 @@ public class GameManager :  NetworkBehaviour
     {
         GameObject cheese = manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains;
         cheese.GetComponent<CheeseManager>().Eat = true;
+
+		//Aquí asignamos el culpable
+		ultimoTurno = turno;
+		culpable = coloresJugadores [ultimoTurno - 1];
     }
 
     public void BreakShoji(Vector3 pos)
@@ -182,12 +201,10 @@ public class GameManager :  NetworkBehaviour
     public void FinJuego()
     {
         juegoFinalizado = true;
-        ultimoTurno = turno;
+        //ultimoTurno = turno;
         turno = 0;
         prueba.text = "SE ACABÓ";
-        culpable = coloresJugadores[ultimoTurno - 1];
-        /*if (tienesRatonMorado)
-            ratonMorado.SetActive(true);*/
+        //culpable = coloresJugadores[ultimoTurno - 1];
     }
 
     public void IniciarInterrogatorio()
@@ -199,7 +216,8 @@ public class GameManager :  NetworkBehaviour
     {
         valorDropdown = ratones.value;
         mensajeDropdown = ratones.options[valorDropdown].text;
-        //SceneManager.LoadScene (nombre);
+		string escena;
+
         if ((mensajeDropdown == "Azul" && culpable == Color.blue) ||
             (mensajeDropdown == "Rojo" && culpable == Color.red) ||
             (mensajeDropdown == "Amarillo" && culpable == Color.yellow) ||
@@ -212,12 +230,7 @@ public class GameManager :  NetworkBehaviour
         {
             SceneManager.LoadScene("EscenaLoser");
         }
-
     }
-
-
-    
-    
     
  
 
