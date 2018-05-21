@@ -65,13 +65,16 @@ public class MouseMovement : NetworkBehaviour{
         }
 
 		manager.GetComponent<GameManager> ().panelChat.SetActive (true);
-		if (isLocalPlayer && mi_color == Color.magenta) {
-			manager.GetComponent<GameManager>().panelResto.SetActive(true);
-		} else if (isLocalPlayer) {
-			manager.GetComponent<GameManager>().panelOtros.SetActive(true);
-		}
-      
+
+		manager.GetComponent<GameManager> ().panelResto.SetActive (true);
+
+		manager.GetComponent<GameManager> ().panelOtros.SetActive (true);
+
+		if(isLocalPlayer)
+			manager.GetComponent<GameManager> ().AsignarInformacionJugador (mi_color);
     }
+
+
 		
     private void Awake()
     {
@@ -146,11 +149,13 @@ public class MouseMovement : NetworkBehaviour{
 			} else if (isLocalPlayer) {
 				manager.GetComponent<GameManager> ().panelOtros.SetActive (true);
 			}
+			manager.GetComponent<GameManager> ().tuRol.text = "";
 		} else {
 			manager.GetComponent<GameManager> ().panelResto.SetActive (false);
 			manager.GetComponent<GameManager> ().panelOtros.SetActive (false);
 			manager.GetComponent<GameManager> ().panelChat.SetActive (false);
 		}
+
 
         RaycastHit hit;
         Ray ray;
@@ -288,8 +293,8 @@ public class MouseMovement : NetworkBehaviour{
 				mis_puntos -= 3;
 			else if (mi_color == Color.yellow)
 				mis_puntos += 4;
-			else
-				mis_puntos++;
+			/*else
+				mis_puntos++;*/
 			manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
          
             if (isServer)

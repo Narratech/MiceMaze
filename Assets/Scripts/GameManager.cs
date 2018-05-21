@@ -25,6 +25,8 @@ public class GameManager :  NetworkBehaviour
 	private int valorDropdown;
 
 	public Text puntuacion;
+	public Text informacionJugador;
+	public Text tuRol;
 	public int puntosRaton;
 
     private WaitForSeconds m_StartWait;
@@ -86,6 +88,8 @@ public class GameManager :  NetworkBehaviour
 			FinJuego ();
 	}
 
+
+
 	public void GenerarLista(Color c){
 		if (c == Color.red) {
 			List<string> nombre = new List<string> (){ "Rojo" };
@@ -128,6 +132,31 @@ public class GameManager :  NetworkBehaviour
         contadorRatones++;
     }
 
+	public void AsignarInformacionJugador(Color c){
+		if (c == Color.red) {
+			informacionJugador.text = "Eres el ratón Rojo";
+			tuRol.text = "Por cada movimiento que realizas ganas 1 punto\n" + "Ganas 200 puntos por comerte el queso";
+		} else if (c == Color.green) {
+			informacionJugador.text = "Eres el ratón Verde";
+			tuRol.text = "Por cada movimiento que realizas ganas 4 puntos\n" + "Ganas 100 puntos por comerte el queso";
+		} else if (c == Color.blue) {
+			informacionJugador.text = "Eres el ratón Azul";
+			tuRol.text = "Por cada movimiento que realizas ganas 1 punto\n" + "Por cada puerta que rompes pierdes 2 puntos\n" 
+				+ "Ganas 100 puntos por comerte el queso";
+		} else if (c == Color.yellow) {
+			informacionJugador.text = "Eres el ratón Amarillo";
+			tuRol.text = "Por cada movimiento ganas 1 punto\n" + "Por cada puerta que rompes ganas 5 puntos\n"
+			+ "Ganas 100 puntos por comerte el queso";
+		} else if (c == Color.magenta) {
+			informacionJugador.text = "Eres el científico";
+			//tuRol.text = "Ganas 300 puntos por adivinar quien se ha comido el queso"; Esto aun no esta implementado
+			tuRol.text = "";
+		}
+
+		informacionJugador.color = c;
+		tuRol.color = c;
+	}
+
 	public void cambiarPuntos(int valor){
 		puntosRaton = valor;
 		puntuacion.text = "" + puntosRaton;
@@ -154,7 +183,6 @@ public class GameManager :  NetworkBehaviour
             turno = 1;
         }
 		totalTurnos--;
-		//prueba.text = "" + turno;
 		prueba.color = coloresJugadores[turno - 1];
 		ponerColor (coloresJugadores [turno - 1]);
     }
