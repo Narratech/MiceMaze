@@ -80,15 +80,13 @@ public class GameManager :  NetworkBehaviour
 		puntosRaton = 0;
 		puntuacion.text = "" + puntosRaton;
 		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
-		interrogatorio.enabled = !interrogatorio.enabled;
+		//interrogatorio.enabled = !interrogatorio.enabled;
     }
 
 	void Update(){
 		if (totalTurnos == 0)
 			FinJuego ();
 	}
-
-
 
 	public void GenerarLista(Color c){
 		if (c == Color.red) {
@@ -132,26 +130,33 @@ public class GameManager :  NetworkBehaviour
         contadorRatones++;
     }
 
-	public void AsignarInformacionJugador(Color c){
+	public void AsignarInformacionJugador(Color c, int rol){
 		if (c == Color.red) {
 			informacionJugador.text = "Eres el ratón Rojo";
-			tuRol.text = "Por cada movimiento que realizas ganas 1 punto\n" + "Ganas 200 puntos por comerte el queso";
 		} else if (c == Color.green) {
 			informacionJugador.text = "Eres el ratón Verde";
-			tuRol.text = "Por cada movimiento que realizas ganas 4 puntos\n" + "Ganas 100 puntos por comerte el queso";
 		} else if (c == Color.blue) {
 			informacionJugador.text = "Eres el ratón Azul";
-			tuRol.text = "Por cada movimiento que realizas ganas 1 punto\n" + "Por cada puerta que rompes pierdes 2 puntos\n" 
-				+ "Ganas 100 puntos por comerte el queso";
 		} else if (c == Color.yellow) {
 			informacionJugador.text = "Eres el ratón Amarillo";
-			tuRol.text = "Por cada movimiento ganas 1 punto\n" + "Por cada puerta que rompes ganas 5 puntos\n"
-			+ "Ganas 100 puntos por comerte el queso";
 		} else if (c == Color.magenta) {
 			informacionJugador.text = "Eres el científico";
+		}
+
+		if(rol == 0){
 			//tuRol.text = "Ganas 300 puntos por adivinar quien se ha comido el queso"; Esto aun no esta implementado
 			tuRol.text = "";
 		}
+		else if(rol == 1)
+			tuRol.text = "Por cada movimiento que realizas ganas 1 punto\n" + "Ganas 200 puntos por comerte el queso";
+		else if(rol == 2)
+			tuRol.text = "Por cada movimiento que realizas ganas 4 puntos\n" + "Ganas 100 puntos por comerte el queso";
+		else if(rol == 3)
+			tuRol.text = "Por cada movimiento que realizas ganas 1 punto\n" + "Por cada puerta que rompes pierdes 2 puntos\n" 
+				+ "Ganas 100 puntos por comerte el queso";
+		else if(rol == 4)
+			tuRol.text = "Por cada movimiento ganas 1 punto\n" + "Por cada puerta que rompes ganas 5 puntos\n"
+				+ "Ganas 100 puntos por comerte el queso";
 
 		informacionJugador.color = c;
 		tuRol.color = c;
@@ -229,13 +234,11 @@ public class GameManager :  NetworkBehaviour
     public void FinJuego()
     {
         juegoFinalizado = true;
-        //ultimoTurno = turno;
         turno = 0;
         prueba.text = "SE ACABÓ";
-        //culpable = coloresJugadores[ultimoTurno - 1];
     }
 
-    public void IniciarInterrogatorio()
+    public void IniciarInterrogatorio() //YA NO SE USA ESTE METODO
     {
         interrogatorio.enabled = !interrogatorio.enabled;
     }

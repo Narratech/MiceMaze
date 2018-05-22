@@ -26,6 +26,7 @@ public class MouseMovement : NetworkBehaviour{
 
 	public int mis_puntos;
 
+	public int rol;
     
     [SyncVar]
     int mi_turno;
@@ -51,10 +52,14 @@ public class MouseMovement : NetworkBehaviour{
 			m_PlayerNumber = manager.GetComponent<GameManager> ().contadorRatones;
 			manager.GetComponent<GameManager> ().m_Mouses [m_PlayerNumber - 1] = this.gameObject;
 			this.gameObject.transform.position = manager.GetComponent<MazeBuilder> ().m_SpawnList [m_PlayerNumber - 1].transform.position;
+
+
+			rol = Random.Range (1, 5);
+
 		}
         else
         {
-			//manager.GetComponent<GameManager> ().panelOtros.SetActive (false);
+			rol = 0;
             manager.GetComponent<GameManager>().ratonMorado = this.gameObject;
             
             foreach (Renderer render in rends)
@@ -71,10 +76,8 @@ public class MouseMovement : NetworkBehaviour{
 		manager.GetComponent<GameManager> ().panelOtros.SetActive (true);
 
 		if(isLocalPlayer)
-			manager.GetComponent<GameManager> ().AsignarInformacionJugador (mi_color);
+			manager.GetComponent<GameManager> ().AsignarInformacionJugador (mi_color, rol);
     }
-
-
 		
     private void Awake()
     {
@@ -174,8 +177,8 @@ public class MouseMovement : NetworkBehaviour{
        
         
 
-        if (mi_color == Color.magenta && juegoAcabado)
-            manager.GetComponent<GameManager>().IniciarInterrogatorio();
+        /*if (mi_color == Color.magenta && juegoAcabado)
+            manager.GetComponent<GameManager>().IniciarInterrogatorio();*/
 
         //Estoy hay que retocarlo, porque solo con el color no vale. Ya que lo cuenta como un raton
         /*if (mi_color == Color.magenta) {
@@ -203,7 +206,11 @@ public class MouseMovement : NetworkBehaviour{
                     }
                     if (Move(hit.collider.gameObject, pos, shoji))
                     {
-						if (mi_color == Color.green)
+						/*if (mi_color == Color.green)
+							mis_puntos += 4;
+						else
+							mis_puntos++;*/
+						if (rol == 2)
 							mis_puntos += 4;
 						else
 							mis_puntos++;
@@ -222,7 +229,11 @@ public class MouseMovement : NetworkBehaviour{
 
                     if (Eat(hit.collider.gameObject, posCheese, pos))
                     {
-						if (mi_color == Color.red)
+						/*if (mi_color == Color.red)
+							mis_puntos += 200;
+						else
+							mis_puntos += 100;*/
+						if (rol == 1)
 							mis_puntos += 200;
 						else
 							mis_puntos += 100;
@@ -289,12 +300,15 @@ public class MouseMovement : NetworkBehaviour{
         }
         if (moved && shoji)
         {
-			if (mi_color == Color.blue)
+			/*if (mi_color == Color.blue)
 				mis_puntos -= 3;
 			else if (mi_color == Color.yellow)
+				mis_puntos += 4;*/
+			if (rol == 3)
+				mis_puntos -= 3;
+			else if (rol == 4)
 				mis_puntos += 4;
-			/*else
-				mis_puntos++;*/
+			
 			manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
          
             if (isServer)
