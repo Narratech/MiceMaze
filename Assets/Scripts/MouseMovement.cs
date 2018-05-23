@@ -61,7 +61,7 @@ public class MouseMovement : NetworkBehaviour{
         {
 			rol = 0;
             manager.GetComponent<GameManager>().ratonMorado = this.gameObject;
-            
+            this.gameObject.transform.position = new Vector3(0, 20, 0);
             foreach (Renderer render in rends)
             {
                 render.enabled = false;
@@ -452,7 +452,7 @@ public class MouseMovement : NetworkBehaviour{
         bool foundChange = false;
         do
         {
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            if (Physics.Raycast(position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
                 foundChange = CheckHit(hit);
             }
@@ -462,7 +462,7 @@ public class MouseMovement : NetworkBehaviour{
         foundChange = false;
         do
         {
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity))
+            if (Physics.Raycast(position, transform.TransformDirection(Vector3.back), out hit, Mathf.Infinity))
             {
                 foundChange = CheckHit(hit);
             }
@@ -472,7 +472,7 @@ public class MouseMovement : NetworkBehaviour{
         foundChange = false;
         do
         {
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, Mathf.Infinity))
+            if (Physics.Raycast(position, transform.TransformDirection(Vector3.right), out hit, Mathf.Infinity))
             {
                 foundChange = CheckHit(hit);
             }
@@ -482,7 +482,7 @@ public class MouseMovement : NetworkBehaviour{
         foundChange = false;
         do
         {
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left), out hit, Mathf.Infinity))
+            if (Physics.Raycast(position, transform.TransformDirection(Vector3.left), out hit, Mathf.Infinity))
             {
                 foundChange = CheckHit(hit);
             }
