@@ -69,6 +69,9 @@ public class Chat : NetworkBehaviour {
 	}
 
 	void Update(){
+		if (raton.finInterrogatorio)
+			return;
+
 		if (!isLocalPlayer)
 			return;
 
@@ -80,19 +83,6 @@ public class Chat : NetworkBehaviour {
 		string accion;//accion sobre la que quieres preguntar
 		string mensaje;//mensaje que se va a producir para hacer la pregunta
 
-		/*if (colorJugador == "Magenta") {
-			valorDropdown = ratonPreguntado.value;
-			ratonInterrogado = ratonPreguntado.options [valorDropdown].text;
-
-			valorDropdown = preguntoPor.value;
-			preguntaSobre = preguntoPor.options [valorDropdown].text;
-
-			valorDropdown = accionesPosibles.value;
-			accion = accionesPosibles.options [valorDropdown].text;
-
-			col = columna.text;
-			fil = fila.text;
-		}*/
 
 		if (Input.GetKeyDown (KeyCode.Return)) {
 
@@ -198,22 +188,12 @@ public class Chat : NetworkBehaviour {
 					mensaje += " en la posicion (" + col + "," + fil + ")?";
 				}
 
+				raton.PreguntaHecha ();
 				CmdEnviar (mensaje);
 			}
 		}
 
 	}
-
-	/*string GenerarAccion(string accion, string mensaje){
-		if (accion == "Comer Queso")
-			mensaje += " comerse el queso";
-		else if (accion == "Romper Shoji")
-			mensaje += " romer un shoji";
-		else if (accion == "Jugar")
-			mensaje += " jugar";
-
-		return mensaje;
-	}*/
 
 
 	[Command]

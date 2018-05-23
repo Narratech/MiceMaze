@@ -17,6 +17,7 @@ public class GameManager :  NetworkBehaviour
     public GameObject m_BrokenShoji;
 
     public Text prueba;// texto para indicar el turno en pantalla
+	public Text textoTurno;
 	public Button interrogatorio;
 	public Dropdown ratones;
 
@@ -44,7 +45,8 @@ public class GameManager :  NetworkBehaviour
     public int contadorRatones = 0;
 
 	public Color culpable;//color del jugador que se ha comido el queso
-    public bool juegoFinalizado = false;
+    public bool juegoFinalizado = false; //Esta variable se usa para saber si la primera fase del juego ha finalizado o no
+	public bool fin = false; //Esta variable se usa para saber si la segunda fase del juego a finalzado o no.
 
     public bool tienesRatonMorado = false;
     public GameObject ratonMorado;
@@ -60,6 +62,7 @@ public class GameManager :  NetworkBehaviour
 	public GameObject panelChat;
 
 	public int totalTurnos = 20;
+	public int totalPreguntas = 10;
 
     void Start()
     {
@@ -79,12 +82,16 @@ public class GameManager :  NetworkBehaviour
 		prueba.text = "" + turno;*/
 		puntosRaton = 0;
 		puntuacion.text = "" + puntosRaton;
-		//Este botón debe activarse cuando el juego haya finalizado y el científico crea saber quien es el culpable
-		//interrogatorio.enabled = !interrogatorio.enabled;
     }
 
 	void Update(){
-		if (totalTurnos == 0)
+		if (totalPreguntas == 0) {
+			fin = true;
+			prueba.text = "SE ACABÓ";
+		} else if(juegoFinalizado){
+			prueba.text = "" + totalPreguntas;
+		}
+		if (totalTurnos == 0 && !juegoFinalizado)
 			FinJuego ();
 	}
 
@@ -128,6 +135,8 @@ public class GameManager :  NetworkBehaviour
     public void IncrementaRatones()
     {
         contadorRatones++;
+		//Esto es por si queremos que el numero de preguntas dependa del número de ratones que tengamos en partida
+		//totalPreguntas += 5;
     }
 
 	public void AsignarInformacionJugador(Color c, int rol){
@@ -234,8 +243,12 @@ public class GameManager :  NetworkBehaviour
     public void FinJuego()
     {
         juegoFinalizado = true;
-        turno = 0;
-        prueba.text = "SE ACABÓ";
+		//Voy a probar el numero de turnos por interrogatorio
+		turno = 0; 
+        //prueba.text = "SE ACABÓ";
+		prueba.color = Color.magenta;
+		prueba.text = "" + totalPreguntas;
+		textoTurno.text = "Total Preguntas: ";
     }
 
     public void IniciarInterrogatorio() //YA NO SE USA ESTE METODO

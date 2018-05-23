@@ -8243,6 +8243,7 @@ MonoBehaviour:
   mensajeDropdown: 
   puntuacion: {fileID: 1909400998}
   informacionJugador: {fileID: 1072177083}
+  textoTurno: {fileID: 358633644}
   tuRol: {fileID: 289983584}
   puntosRaton: 0
   turno: 1
@@ -8256,6 +8257,7 @@ MonoBehaviour:
   contadorRatones: 0
   culpable: {r: 0, g: 0, b: 0, a: 0}
   juegoFinalizado: 0
+  fin: 0
   tienesRatonMorado: 0
   ratonMorado: {fileID: 0}
   ratonPreguntado: {fileID: 276099458}
@@ -8265,7 +8267,7 @@ MonoBehaviour:
   panelResto: {fileID: 511804115}
   panelChat: {fileID: 198095684}
   totalTurnos: 20
-  probandoAleatorio: 0
+  totalPreguntas: 10
 --- !u!4 &1392028998
 Transform:
   m_ObjectHideFlags: 0

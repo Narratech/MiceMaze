@@ -20,6 +20,9 @@ public class MouseMovement : NetworkBehaviour{
     public GameObject manager;
 
     public bool juegoAcabado = false;
+	public bool finInterrogatorio = false;
+
+	private bool panelActivo = false;//Esta variable se usa para no estar poniendo a true el setActive() de los paneles del interrogatorio
 
     [SyncVar]
 	public Color mi_color = Color.red;
@@ -36,6 +39,7 @@ public class MouseMovement : NetworkBehaviour{
     public bool te_has_movido = false;
 
     public int max_turnos = 10;
+	public int numPreguntas = 0;
 
     
     private void Start()
@@ -60,6 +64,7 @@ public class MouseMovement : NetworkBehaviour{
         else
         {
 			rol = 0;
+			numPreguntas = manager.GetComponent<GameManager> ().totalPreguntas;
             manager.GetComponent<GameManager>().ratonMorado = this.gameObject;
             this.gameObject.transform.position = new Vector3(0, 20, 0);
             foreach (Renderer render in rends)
@@ -138,21 +143,43 @@ public class MouseMovement : NetworkBehaviour{
         RpcBreakShoji(pos);
     }
 
+	[Command]
+	void CmdPreguntaRealizada(){
+		RpcPreguntaRealizada ();
+	}
 
+	[ClientRpc]
+	void RpcPreguntaRealizada(){
+		manager.GetComponent<GameManager> ().totalPreguntas--;
+	}
 
+	public void PreguntaHecha(){
+		if (isServer)
+			RpcPreguntaRealizada();
+		else
+			CmdPreguntaRealizada();
+	}
+		
     // Intentad que no haya tantas cosas en el Update, sino recurrir a eventos
     private void Update()
     {
         juegoAcabado = manager.GetComponent<GameManager>().juegoFinalizado;
+		finInterrogatorio = manager.GetComponent<GameManager> ().fin;
+
+		if (finInterrogatorio)
+			return;
 
 		if (juegoAcabado) {
-			manager.GetComponent<GameManager> ().panelChat.SetActive (true);
-			if (isLocalPlayer && mi_color == Color.magenta) {
-				manager.GetComponent<GameManager> ().panelResto.SetActive (true);
-			} else if (isLocalPlayer) {
-				manager.GetComponent<GameManager> ().panelOtros.SetActive (true);
+			if (!panelActivo) {
+				manager.GetComponent<GameManager> ().panelChat.SetActive (true);
+				if (isLocalPlayer && mi_color == Color.magenta) {
+					manager.GetComponent<GameManager> ().panelResto.SetActive (true);
+				} else if (isLocalPlayer) {
+					manager.GetComponent<GameManager> ().panelOtros.SetActive (true);
+				}
+				manager.GetComponent<GameManager> ().tuRol.text = "";
+				panelActivo = true;
 			}
-			manager.GetComponent<GameManager> ().tuRol.text = "";
 		} else {
 			manager.GetComponent<GameManager> ().panelResto.SetActive (false);
 			manager.GetComponent<GameManager> ().panelOtros.SetActive (false);
@@ -170,12 +197,12 @@ public class MouseMovement : NetworkBehaviour{
             return;
         }
 
+
+
         if(m_PlayerNumber != manager.GetComponent<GameManager>().turno)
         {
             return;
-        }
-       
-        
+        } 
 
         /*if (mi_color == Color.magenta && juegoAcabado)
             manager.GetComponent<GameManager>().IniciarInterrogatorio();*/
@@ -229,10 +256,7 @@ public class MouseMovement : NetworkBehaviour{
 
                     if (Eat(hit.collider.gameObject, posCheese, pos))
                     {
-						/*if (mi_color == Color.red)
-							mis_puntos += 200;
-						else
-							mis_puntos += 100;*/
+						
 						if (rol == 1)
 							mis_puntos += 200;
 						else
