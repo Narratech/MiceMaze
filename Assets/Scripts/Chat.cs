@@ -83,7 +83,6 @@ public class Chat : NetworkBehaviour {
 		string accion;//accion sobre la que quieres preguntar
 		string mensaje;//mensaje que se va a producir para hacer la pregunta
 
-
 		if (Input.GetKeyDown (KeyCode.Return)) {
 
 			if (colorJugador != "Magenta" /*&& input.text != ""*/) {
@@ -149,6 +148,7 @@ public class Chat : NetworkBehaviour {
 					}
 				}
 
+				raton.RespuestaHecha ();
 				CmdEnviar (mensaje);
 			} else if(colorJugador == "Magenta"){
 				valorDropdown = ratonPreguntado.value;

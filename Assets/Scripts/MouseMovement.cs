@@ -159,6 +159,23 @@ public class MouseMovement : NetworkBehaviour{
 		else
 			CmdPreguntaRealizada();
 	}
+
+	[Command]
+	void CmdRespuestaRealizada(){
+		RpcRespuestaRealizada ();
+	}
+
+	[ClientRpc]
+	void RpcRespuestaRealizada(){
+		manager.GetComponent<GameManager> ().CambiarTurno ();
+	}
+
+	public void RespuestaHecha(){
+		if (isServer)
+			RpcRespuestaRealizada ();
+		else
+			CmdRespuestaRealizada ();
+	}
 		
     // Intentad que no haya tantas cosas en el Update, sino recurrir a eventos
     private void Update()
@@ -180,6 +197,11 @@ public class MouseMovement : NetworkBehaviour{
 				manager.GetComponent<GameManager> ().tuRol.text = "";
 				panelActivo = true;
 			}
+			if (m_PlayerNumber != manager.GetComponent<GameManager> ().turno && mi_color != Color.magenta)
+				GetComponent<Chat> ().enabled = false;
+			else
+				GetComponent<Chat> ().enabled = true;
+			return;
 		} else {
 			manager.GetComponent<GameManager> ().panelResto.SetActive (false);
 			manager.GetComponent<GameManager> ().panelOtros.SetActive (false);

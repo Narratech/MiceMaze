@@ -88,11 +88,13 @@ public class GameManager :  NetworkBehaviour
     }
 
 	void Update(){
+		Text cientifico = GameObject.Find ("Preguntas").GetComponent<Text> ();
+		cientifico.color = Color.magenta;
 		if (totalPreguntas == 0) {
-			//fin = true; Esto se hace en FaseInterrogatorio(), es decir, una vez el cientifico ha declarado a algun culpable
 			prueba.text = "SE ACABÓ";
+			cientifico.text = "FIN";
 		} else if(juegoFinalizado){
-			prueba.text = "" + totalPreguntas;
+			cientifico.text = "" + totalPreguntas;
 		}
 		if (totalTurnos == 0 && !juegoFinalizado)
 			FinJuego ();
@@ -189,6 +191,10 @@ public class GameManager :  NetworkBehaviour
 		else if (c == Color.yellow)
 			prueba.text = "Amarillo";
 	}
+
+	/*public void cambiarRatonInterrogado(Color c){
+
+	}*/
     
     public void CambiarTurno()
     {
@@ -247,11 +253,12 @@ public class GameManager :  NetworkBehaviour
     {
         juegoFinalizado = true;
 		//Voy a probar el numero de turnos por interrogatorio
-		turno = 0; 
+		//turno = 0; Esto es para probar
         //prueba.text = "SE ACABÓ";
-		prueba.color = Color.magenta;
-		prueba.text = "" + totalPreguntas;
-		textoTurno.text = "Total Preguntas: ";
+
+		//prueba.color = Color.magenta;
+		//prueba.text = "" + totalPreguntas;
+		//textoTurno.text = "Total Preguntas: ";
     }
 
     public void IniciarInterrogatorio() //YA NO SE USA ESTE METODO
