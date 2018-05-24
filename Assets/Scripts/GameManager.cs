@@ -64,6 +64,9 @@ public class GameManager :  NetworkBehaviour
 	public int totalTurnos = 20;
 	public int totalPreguntas = 10;
 
+	//Para mostrar los resultados, es decir, los puntos
+	public GameObject panelCientifico;
+
     void Start()
     {
         var configuration = ConfigurationXml.Load();
@@ -86,7 +89,7 @@ public class GameManager :  NetworkBehaviour
 
 	void Update(){
 		if (totalPreguntas == 0) {
-			fin = true;
+			//fin = true; Esto se hace en FaseInterrogatorio(), es decir, una vez el cientifico ha declarado a algun culpable
 			prueba.text = "SE ACABÓ";
 		} else if(juegoFinalizado){
 			prueba.text = "" + totalPreguntas;
@@ -261,18 +264,25 @@ public class GameManager :  NetworkBehaviour
         valorDropdown = ratones.value;
         mensajeDropdown = ratones.options[valorDropdown].text;
 		string escena;
-
+		fin = true;
+		panelCientifico.SetActive (true);
+		Text cientifico = GameObject.Find ("TextoCientifico").GetComponent<Text> ();
+		cientifico.color = Color.magenta;
         if ((mensajeDropdown == "Azul" && culpable == Color.blue) ||
             (mensajeDropdown == "Rojo" && culpable == Color.red) ||
             (mensajeDropdown == "Amarillo" && culpable == Color.yellow) ||
             (mensajeDropdown == "Verde" && culpable == Color.green))
         {
-
-            SceneManager.LoadScene("EscenaWin");
+			puntuacion.text = "" + 350;
+			cientifico.text = "¡¡¡HAS ACERTADO QUIEN SE COMIÓ EL QUESO!!!";
+            //SceneManager.LoadScene("EscenaWin");
+			//GameObject.Find ("Raton1").GetComponent<Dropdown> ();
         }
         else
         {
-            SceneManager.LoadScene("EscenaLoser");
+			puntuacion.text = "" + 0;
+			cientifico.text = "¡¡¡NO HAS ACERTADO QUIEN SE COMIÓ EL QUESO!!!";
+            //SceneManager.LoadScene("EscenaLoser");
         }
     }
     
