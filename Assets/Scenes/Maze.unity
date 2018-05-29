@@ -1989,7 +1989,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 305264735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -228.59996, y: -329.19998, z: 0}
+  m_LocalPosition: {x: -218, y: -329.19998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 430337476}
@@ -1997,8 +1997,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -228.59998, y: -329.19998}
-  m_SizeDelta: {x: 59.1, y: 20.3}
+  m_AnchoredPosition: {x: -218, y: -329.19998}
+  m_SizeDelta: {x: 80.51, y: 20.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &305264737
 MonoBehaviour:
@@ -8426,6 +8426,7 @@ MonoBehaviour:
   informacionJugador: {fileID: 1072177083}
   tuRol: {fileID: 289983584}
   puntosRaton: 0
+  cientifico: {fileID: 1401377896}
   turno: 1
   ultimoTurno: 0
   coloresJugadores:
@@ -12791,7 +12792,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Accion:'
+  m_Text: 'Preguntas:'
 --- !u!222 &2090941244
 CanvasRenderer:
   m_ObjectHideFlags: 0

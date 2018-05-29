@@ -29,6 +29,7 @@ public class GameManager :  NetworkBehaviour
 	public Text informacionJugador;
 	public Text tuRol;
 	public int puntosRaton;
+	public Text cientifico;
 
     private WaitForSeconds m_StartWait;
     private WaitForSeconds m_EndWait;
@@ -88,13 +89,14 @@ public class GameManager :  NetworkBehaviour
     }
 
 	void Update(){
-		Text cientifico = GameObject.Find ("Preguntas").GetComponent<Text> ();
-		cientifico.color = Color.magenta;
+		//Text cientifico = GameObject.Find ("Preguntas").GetComponent<Text> ();
+
 		if (totalPreguntas == 0) {
 			prueba.text = "SE ACABÓ";
 			cientifico.text = "FIN";
 		} else if(juegoFinalizado){
 			cientifico.text = "" + totalPreguntas;
+			cientifico.color = Color.magenta;
 		}
 		if (totalTurnos == 0 && !juegoFinalizado)
 			FinJuego ();
