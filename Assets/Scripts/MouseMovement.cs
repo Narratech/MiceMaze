@@ -246,130 +246,110 @@ public class MouseMovement : NetworkBehaviour{
                 pos.x = (int)this.gameObject.transform.position.x / 10;
                 pos.y = 0.75f;
                 pos.z = (int)this.gameObject.transform.position.z / 10;
-                if (hit.collider.gameObject.layer == 8 || hit.collider.gameObject.layer == 10 || hit.collider.gameObject.layer == 13 || hit.collider.gameObject.layer == 12)
+                switch (hit.collider.gameObject.layer)
                 {
-                    bool shoji = false;
-                    if (hit.collider.gameObject.layer == 10 || hit.collider.gameObject.layer == 13 || hit.collider.gameObject.layer == 12)
-                    {
-                        shoji = true;
-                    }
-                    if (Move(hit.collider.gameObject, pos, shoji))
-                    {
-						/*if (mi_color == Color.green)
-							mis_puntos += 4;
-						else
-							mis_puntos++;*/
-						if (rol == 2)
-							mis_puntos += 4;
-						else
-							mis_puntos++;
-						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
-                        
-                            
-                       
-                       
-                    }
-                }if(hit.collider.gameObject.layer == 9)
-                {
+                    case 8: //Tile
+                        if (Move(hit.collider.gameObject, pos))
+                        {
+                            if (rol == 2)
+                                mis_puntos += 4;
+                            else
+                                mis_puntos++;
+                            manager.GetComponent<GameManager>().cambiarPuntos(mis_puntos);
+                        }; break;
+                    case 9: //Cheese
+                        Vector3 posCheese = hit.transform.position;
+                        if (Eat(hit.collider.gameObject, posCheese, pos))
+                        {
 
-                    Vector3 posCheese = hit.transform.position;
+                            if (rol == 1)
+                                mis_puntos += 200;
+                            else
+                                mis_puntos += 100;
 
+                            manager.GetComponent<GameManager>().cambiarPuntos(mis_puntos);
 
+                        }; break;
+                    case 10: //Shoji
+                        if (Move(hit.collider.gameObject, pos))
+                        {
+                            if (rol == 2)
+                                mis_puntos += 4;
+                            else
+                                mis_puntos++;
+                            manager.GetComponent<GameManager>().cambiarPuntos(mis_puntos);
+                            if (rol == 3)
+                                mis_puntos -= 3;
+                            else if (rol == 4)
+                                mis_puntos += 4;
 
-                    if (Eat(hit.collider.gameObject, posCheese, pos))
-                    {
-						
-						if (rol == 1)
-							mis_puntos += 200;
-						else
-							mis_puntos += 100;
+                            manager.GetComponent<GameManager>().cambiarPuntos(mis_puntos);
 
-						manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
-
-                        /*if (isServer)
-                            RpcTerminarJuego();
-                        else
-                            CmdTerminarJuego();*/
-                    }
-                }
-                
+                            if (isServer)
+                            {
+                                RpcBreakShoji(hit.collider.transform.position);
+                            }
+                            else
+                            {
+                                CmdBreakShoji(hit.collider.transform.position);
+                            }
+                            manager.GetComponent<GameManager>().BreakShoji(hit.collider.transform.position);
+                        }; break; 
+                    case 12: //Player
+                        if (Move(hit.collider.gameObject, pos))
+                        {
+                            if (rol == 2)
+                                mis_puntos += 4;
+                            else
+                                mis_puntos++;
+                            manager.GetComponent<GameManager>().cambiarPuntos(mis_puntos);
+                        }; break; 
+                    case 13: //BrokenShoji
+                        if (Move(hit.collider.gameObject, pos))
+                        {
+                            if (rol == 2)
+                                mis_puntos += 4;
+                            else
+                                mis_puntos++;
+                            manager.GetComponent<GameManager>().cambiarPuntos(mis_puntos);
+                        }; break; 
+                }                                           
             }
         }
     }
 
     // Podría funcionar de esta manera: marcar la casilla de origen como libre, la de llegada como ocupada y cambiar la variables MOVING para que se vaya moviendo... 
     // pero puedes pasar ya el turno y dejar que se muevan otro jugador si quiere (aunque todavía siga moving el ratón, en sus updates) 
-    public bool Move(GameObject tile, Vector3 position, bool shoji)
+    public bool Move(GameObject tile, Vector3 position)
     {
-        GameObject contains = null;
         bool moved = false;
         Vector3 pos;
-        if (!shoji)
-        {
-            contains = tile.GetComponent<TileManager>().contains;
-            pos = tile.GetComponent<TileManager>().GetPosition();
-        }
-        else
-        {
-            pos = tile.gameObject.transform.position;
-            pos.x = (int) pos.x / 10;
-            pos.z = (int) pos.z / 10;
-        }
+
+        pos = tile.gameObject.transform.position;
+        pos.x = (int) pos.x / 10;
+        pos.z = (int) pos.z / 10;       
         pos.y = 0.75f;
-     
-        if (contains == null)
+
+        if (position.z + 1 == pos.z && position.x == pos.x)
         {
-            // Faltaría añadir la rotación
-            if (position.z + 1 == pos.z && position.x == pos.x)
-            {
-                StartCoroutine(MoveAnimation(0, 1, tile.transform.position));
-                moved = true;
-            }
-            if (position.z - 1 == pos.z && position.x == pos.x)
-            {
+            StartCoroutine(MoveAnimation(0, 1, tile.transform.position));
+            moved = true;
+        }
+        if (position.z - 1 == pos.z && position.x == pos.x)
+        {
                 StartCoroutine(MoveAnimation(0, -1, tile.transform.position));
                 moved = true;
-            }
-            if (position.z == pos.z && position.x + 1 == pos.x)
-            {
-                StartCoroutine(MoveAnimation(1, 0, tile.transform.position));
-                moved = true;
-            }
-            if (position.z == pos.z && position.x - 1 == pos.x)
-            {
-                StartCoroutine(MoveAnimation(-1, 0, tile.transform.position));
-                moved = true;
-            }
-
-
-
         }
-        if (moved && shoji)
+        if (position.z == pos.z && position.x + 1 == pos.x)
         {
-			/*if (mi_color == Color.blue)
-				mis_puntos -= 3;
-			else if (mi_color == Color.yellow)
-				mis_puntos += 4;*/
-			if (rol == 3)
-				mis_puntos -= 3;
-			else if (rol == 4)
-				mis_puntos += 4;
-			
-			manager.GetComponent<GameManager> ().cambiarPuntos (mis_puntos);
-         
-            if (isServer)
-            {
-                RpcBreakShoji(tile.transform.position);
-            }
-            else
-            {
-                CmdBreakShoji(tile.transform.position);
-            }
-            manager.GetComponent<GameManager>().BreakShoji(pos);
-           
+            StartCoroutine(MoveAnimation(1, 0, tile.transform.position));
+            moved = true;
         }
-
-
+        if (position.z == pos.z && position.x - 1 == pos.x)
+        {
+            StartCoroutine(MoveAnimation(-1, 0, tile.transform.position));
+            moved = true;
+        } 
         return moved;
     }
 
