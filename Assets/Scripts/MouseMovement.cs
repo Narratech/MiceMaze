@@ -41,13 +41,14 @@ public class MouseMovement : NetworkBehaviour{
     public int max_turnos = 10;
 	public int numPreguntas = 0;
 
-    
+	float temporizador;
+
     private void Start()
 	{
 		Renderer[] rends = GetComponentsInChildren<Renderer> ();
 		rends [0].material.color = mi_color;
 		mis_puntos = 0;
-
+	
 		manager = GameObject.Find ("GameManager");
 		if (mi_color != Color.magenta){
 			//manager.GetComponent<GameManager> ().panelResto.SetActive (false);
@@ -56,7 +57,6 @@ public class MouseMovement : NetworkBehaviour{
 			m_PlayerNumber = manager.GetComponent<GameManager> ().contadorRatones;
 			manager.GetComponent<GameManager> ().m_Mouses [m_PlayerNumber - 1] = this.gameObject;
 			this.gameObject.transform.position = manager.GetComponent<MazeBuilder> ().m_SpawnList [m_PlayerNumber - 1].transform.position;
-
 
 			rol = Random.Range (1, 5);
 
@@ -88,7 +88,6 @@ public class MouseMovement : NetworkBehaviour{
     {
 		
     }
-
 
     public void moverse()
     {
@@ -176,12 +175,23 @@ public class MouseMovement : NetworkBehaviour{
 		else
 			CmdRespuestaRealizada ();
 	}
+
+	[ClientRpc]
+	void RpcCambiarTiempo(){
+		manager.GetComponent<GameManager> ().segundosTurno = temporizador;
+	}
+
+	[Command] 
+	void CmdCambiarTiempo(){
+		RpcCambiarTiempo ();
+	}
 		
     // Intentad que no haya tantas cosas en el Update, sino recurrir a eventos
     private void Update()
     {
         juegoAcabado = manager.GetComponent<GameManager>().juegoFinalizado;
 		finInterrogatorio = manager.GetComponent<GameManager> ().fin;
+
 
 		if (finInterrogatorio)
 			return;
@@ -225,6 +235,33 @@ public class MouseMovement : NetworkBehaviour{
         {
             return;
         } 
+
+		temporizador -= Time.deltaTime;
+		if (isServer)
+			RpcCambiarTiempo();
+		else
+		{
+			CmdCambiarTiempo();
+		}
+			
+
+		if (temporizador <= 0) {
+			CmdNotificarMovimiento ();
+			temporizador = 10;
+			return;
+		}
+
+		/*temporizador = manager.GetComponent<GameManager> ().segundosTurno;
+		if (temporizador == 0) {
+			if (isServer)
+				RpcNotificarMovimiento();
+			else
+			{
+				CmdNotificarMovimiento();
+			}
+		}*/
+			
+			
 
         /*if (mi_color == Color.magenta && juegoAcabado)
             manager.GetComponent<GameManager>().IniciarInterrogatorio();*/
@@ -444,6 +481,7 @@ public class MouseMovement : NetworkBehaviour{
         {
             CmdNotificarMovimiento();
         }
+		temporizador = 10;
     }
 
     public void DisableControl()

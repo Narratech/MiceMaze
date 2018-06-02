@@ -68,6 +68,9 @@ public class GameManager :  NetworkBehaviour
 	//Para mostrar los resultados, es decir, los puntos
 	public GameObject panelCientifico;
 
+	public Text duracionTurno;
+	public float segundosTurno = 10;
+
     void Start()
     {
         var configuration = ConfigurationXml.Load();
@@ -86,10 +89,11 @@ public class GameManager :  NetworkBehaviour
 		prueba.text = "" + turno;*/
 		puntosRaton = 0;
 		puntuacion.text = "" + puntosRaton;
+		duracionTurno.text = "" + segundosTurno.ToString ("f0");
     }
 
 	void Update(){
-		//Text cientifico = GameObject.Find ("Preguntas").GetComponent<Text> ();
+		
 
 		if (totalPreguntas == 0) {
 			prueba.text = "SE ACABÓ";
@@ -97,9 +101,22 @@ public class GameManager :  NetworkBehaviour
 		} else if(juegoFinalizado){
 			cientifico.text = "" + totalPreguntas;
 			cientifico.color = Color.magenta;
+			return;
 		}
 		if (totalTurnos == 0 && !juegoFinalizado)
 			FinJuego ();
+
+		duracionTurno.text = "" + segundosTurno.ToString ("f0");
+
+		/*if (segundosTurno >= 0) {
+			segundosTurno -= Time.deltaTime;
+
+		}
+
+		if (segundosTurno <= 0) {
+			segundosTurno = 10;
+		}
+		duracionTurno.text = "" + segundosTurno.ToString ("f0");*/
 	}
 
 	public void GenerarLista(Color c){

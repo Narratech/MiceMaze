@@ -797,6 +797,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raton: {fileID: 114524139859211904}
   colorJugador: 
+  mensajeDropdown: 
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114503985499532728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -842,7 +844,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerNumber: 0
   manager: {fileID: 0}
+  juegoAcabado: 0
+  finInterrogatorio: 0
   mi_color: {r: 1, g: 0, b: 0, a: 1}
   mis_puntos: 6
+  rol: 0
   move: 0
   te_has_movido: 0
+  max_turnos: 10
+  numPreguntas: 0
+  segundosRestantes: {fileID: 114893045653574304, guid: e4ad9abfb9fceaf4da731672cebb65ac,
+    type: 2}
