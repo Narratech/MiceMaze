@@ -452,36 +452,39 @@ MonoBehaviour:
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "T\xFA ser\xE1s mi sustituto. D\xE9jame que te explique en que consiste
-      tu trabajo"
+  - vMessage: "D\xE9jame que te expique en que consiste todo."
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "El rat\xF3n azul pierde puntos si hace cosas malas, como romper puertas
-      (Gana puntos jugando con otros ratones)"
+  - vMessage: "Hay un total de 5 jugadores. Cuatro juegan como ratones y uno como
+      cient\xEDfico."
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "Al rat\xF3n verde es un culo inquieto, no puede estarse quieto (Gana
-      m\xE1s puntos por moverse) "
+  - vMessage: Los ratones tienen diferentes tareas que realizar que hacen que pierdas
+      o ganes puntos.
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "El rat\xF3n rojo es un glot\xF3n. S\xF3lo piensa en comerse el queso
-      (Gana una gran cantidad de puntos por coemrse el queso)"
+  - vMessage: "Esto se te explicar\xE1 en pantalla una vez comience la partida."
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "El rat\xF3n amarillo es un cabr\xF3n, s\xF3lo piensa en liarla parda
-      (Gana puntos rompiendo puertas)"
+  - vMessage: Todos los jugadores tienen un tiempo asignado durante su turno.
+    vMessageForm: 0
+    vBorderColor: {r: 1, g: 1, b: 1, a: 0}
+    vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
+    vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
+    vClickToCloseBubble: 1
+  - vMessage: "Cuando el tiempo se acaba se cambia de turno autom\xE1ticamente."
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
@@ -493,8 +496,15 @@ MonoBehaviour:
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
     vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
     vClickToCloseBubble: 1
-  - vMessage: "En dicha fase el jugador de color morado o magenta deber\xE1 interrogar
-      a los ratones para descubrir quien se ha comido el queso"
+  - vMessage: "En dicha fase el cient\xEDfico deber\xE1 interrogar a los ratones para
+      descubrir quien se comi\xF3 el queso."
+    vMessageForm: 0
+    vBorderColor: {r: 1, g: 1, b: 1, a: 0}
+    vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}
+    vFontColor: {r: 0.33915442, g: 0.9044118, b: 0.8342419, a: 0}
+    vClickToCloseBubble: 1
+  - vMessage: "El cient\xEDfico puede realizar X preguntas. Una vez se acaben las
+      preguntas deber\xE1 declarar un culpable."
     vMessageForm: 0
     vBorderColor: {r: 1, g: 1, b: 1, a: 0}
     vBodyColor: {r: 0.61764705, g: 0.5939685, b: 0.49502596, a: 0}

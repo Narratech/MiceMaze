@@ -233,6 +233,7 @@ public class MouseMovement : NetworkBehaviour{
 
         if(m_PlayerNumber != manager.GetComponent<GameManager>().turno)
         {
+			temporizador = 10;
             return;
         } 
 
@@ -248,7 +249,7 @@ public class MouseMovement : NetworkBehaviour{
 		if (temporizador <= 0) {
 			CmdNotificarMovimiento ();
 			temporizador = 10;
-			return;
+			//return;
 		}
 
 		/*temporizador = manager.GetComponent<GameManager> ().segundosTurno;

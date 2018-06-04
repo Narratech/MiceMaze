@@ -8616,10 +8616,12 @@ MonoBehaviour:
   panelOtros: {fileID: 1286778261}
   panelResto: {fileID: 511804115}
   panelChat: {fileID: 198095684}
+  panelTemporizador: {fileID: 325838857}
   totalTurnos: 20
   totalPreguntas: 10
   panelCientifico: {fileID: 1447897554}
   duracionTurno: {fileID: 427772586}
+  segundosTurno: 10
 --- !u!4 &1392028998
 Transform:
   m_ObjectHideFlags: 0

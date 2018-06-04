@@ -61,6 +61,7 @@ public class GameManager :  NetworkBehaviour
 	public GameObject panelOtros;
 	public GameObject panelResto;
 	public GameObject panelChat;
+	public GameObject panelTemporizador;
 
 	public int totalTurnos = 20;
 	public int totalPreguntas = 10;
@@ -271,6 +272,7 @@ public class GameManager :  NetworkBehaviour
     public void FinJuego()
     {
         juegoFinalizado = true;
+		panelTemporizador.SetActive (false);
 		//Voy a probar el numero de turnos por interrogatorio
 		//turno = 0; Esto es para probar
         //prueba.text = "SE ACABÓ";
