@@ -559,7 +559,7 @@ public class MouseMovement : NetworkBehaviour{
     private bool CheckHit(RaycastHit hit)
     {
         bool foundChange = false;
-        Vector3 pos = new Vector3(hit.collider.gameObject.transform.position.x / 10, hit.collider.gameObject.transform.position.y / 10, hit.collider.gameObject.transform.position.z / 10);
+        Vector3 pos = hit.collider.gameObject.transform.position;
         if (hit.collider.gameObject.layer == 9)
         {
             if (hit.collider.gameObject.GetComponent<CheeseManager>().Eat)

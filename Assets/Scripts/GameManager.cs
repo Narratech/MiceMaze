@@ -63,7 +63,7 @@ public class GameManager :  NetworkBehaviour
 	public GameObject panelChat;
 	public GameObject panelTemporizador;
 
-	public int totalTurnos = 20;
+	public int totalTurnos = 26;
 	public int totalPreguntas = 10;
 
 	//Para mostrar los resultados, es decir, los puntos
@@ -249,14 +249,14 @@ public class GameManager :  NetworkBehaviour
 
     public void BreakShoji(Vector3 pos)
     {
-        int x = (int)pos.x;
-        int z = (int)pos.z;
+        int x = (int)pos.x/10;
+        int z = (int)pos.z/10;
         int position = z * 10 + x;
         /*Vector3 position = manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains.gameObject.transform.position;
         position.y = 0f;*/
         TileManager tile = m_Tiles[position];
         Quaternion rotation = tile.contains.gameObject.transform.rotation;
-        pos = new Vector3(pos.x*10, 0, pos.z*10);
+        pos.y = 0;
         GameObject brokenShoji = Instantiate(m_BrokenShoji, pos, rotation);
         Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
         manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().SetContains(brokenShoji);
