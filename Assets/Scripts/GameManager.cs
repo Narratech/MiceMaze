@@ -249,14 +249,14 @@ public class GameManager :  NetworkBehaviour
 
     public void BreakShoji(Vector3 pos)
     {
-        int x = (int)pos.x/10;
-        int z = (int)pos.z/10;
+        int x = (int)pos.x;
+        int z = (int)pos.z;
         int position = z * 10 + x;
         /*Vector3 position = manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains.gameObject.transform.position;
         position.y = 0f;*/
         TileManager tile = m_Tiles[position];
         Quaternion rotation = tile.contains.gameObject.transform.rotation;
-        pos = new Vector3(pos.x, 0, pos.z);
+        pos = new Vector3(pos.x*10, 0, pos.z*10);
         GameObject brokenShoji = Instantiate(m_BrokenShoji, pos, rotation);
         Destroy(manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().contains);
         manager.GetComponent<MazeBuilder>().GetTile(pos).GetComponent<TileManager>().SetContains(brokenShoji);
